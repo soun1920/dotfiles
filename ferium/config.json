@@ -1,0 +1,372 @@
+{
+  "profiles": [
+    {
+      "name": "1.21.4-fabric",
+      "output_dir": "\\\\?\\D:\\PrismLauncher\\instances\\1.21(1)\\.minecraft\\mods",
+      "game_version": "1.21.4",
+      "mod_loader": "Fabric",
+      "mods": [
+        {
+          "name": "Auth Me",
+          "identifier": {
+            "ModrinthProject": "yjgIrBjZ"
+          }
+        },
+        {
+          "name": "Axiom",
+          "identifier": {
+            "ModrinthProject": "N6n5dqoA"
+          }
+        },
+        {
+          "name": "Better Ping Display [Fabric]",
+          "identifier": {
+            "ModrinthProject": "MS1ZMyR7"
+          }
+        },
+        {
+          "name": "Better Statistics Screen",
+          "identifier": {
+            "ModrinthProject": "n6PXGAoM"
+          }
+        },
+        {
+          "name": "Bobby",
+          "identifier": {
+            "ModrinthProject": "M08ruV16"
+          }
+        },
+        {
+          "name": "CalcMod",
+          "identifier": {
+            "ModrinthProject": "XoHTb2Ap"
+          }
+        },
+        {
+          "name": "Careful Break",
+          "identifier": {
+            "ModrinthProject": "g4vUZNRA"
+          }
+        },
+        {
+          "name": "Carpet",
+          "identifier": {
+            "ModrinthProject": "TQTTVgYE"
+          }
+        },
+        {
+          "name": "Carpet Org Addition",
+          "identifier": {
+            "ModrinthProject": "L0bOPIqR"
+          }
+        },
+        {
+          "name": "Carpet TIS Addition",
+          "identifier": {
+            "ModrinthProject": "jE0SjGuf"
+          }
+        },
+        {
+          "name": "ChatImage",
+          "identifier": {
+            "ModrinthProject": "zhVN1dvW"
+          }
+        },
+        {
+          "name": "Chunks fade in",
+          "identifier": {
+            "ModrinthProject": "JaNmzvA8"
+          }
+        },
+        {
+          "name": "Cloth Config API",
+          "identifier": {
+            "ModrinthProject": "9s6osm5g"
+          }
+        },
+        {
+          "name": "Command GUI Buttons",
+          "identifier": {
+            "ModrinthProject": "1E3oheF7"
+          }
+        },
+        {
+          "name": "Continuity",
+          "identifier": {
+            "ModrinthProject": "1IjD5062"
+          }
+        },
+        {
+          "name": "CraterLib",
+          "identifier": {
+            "ModrinthProject": "Nn8Wasaq"
+          }
+        },
+        {
+          "name": "DeathLog",
+          "identifier": {
+            "ModrinthProject": "TPAYeAOc"
+          }
+        },
+        {
+          "name": "EssentialClient",
+          "identifier": {
+            "ModrinthProject": "sH0dfrKf"
+          }
+        },
+        {
+          "name": "Fabric API",
+          "identifier": {
+            "ModrinthProject": "P7dR8mSH"
+          }
+        },
+        {
+          "name": "Fabric Language Kotlin",
+          "identifier": {
+            "ModrinthProject": "Ha28R6CL"
+          }
+        },
+        {
+          "name": "FabricSkyboxes",
+          "identifier": {
+            "ModrinthProject": "YBz7DOs8"
+          }
+        },
+        {
+          "name": "Fabrishot",
+          "identifier": {
+            "ModrinthProject": "3qsfQtE9"
+          }
+        },
+        {
+          "name": "FerriteCore",
+          "identifier": {
+            "ModrinthProject": "uXXizFIs"
+          }
+        },
+        {
+          "name": "Forge Config API Port",
+          "identifier": {
+            "ModrinthProject": "ohNO6lps"
+          }
+        },
+        {
+          "name": "Global Options",
+          "identifier": {
+            "ModrinthProject": "pJXYIIFx"
+          }
+        },
+        {
+          "name": "ImmediatelyFast",
+          "identifier": {
+            "ModrinthProject": "5ZwdcRci"
+          }
+        },
+        {
+          "name": "In-Game Account Switcher",
+          "identifier": {
+            "ModrinthProject": "cudtvDnd"
+          }
+        },
+        {
+          "name": "Indium",
+          "identifier": {
+            "ModrinthProject": "Orvt0mRa"
+          }
+        },
+        {
+          "name": "Inventory Profiles Next",
+          "identifier": {
+            "ModrinthProject": "O7RBXm3n"
+          }
+        },
+        {
+          "name": "Iris Shaders",
+          "identifier": {
+            "ModrinthProject": "YL57xq9U"
+          }
+        },
+        {
+          "name": "Item Scroller",
+          "identifier": {
+            "ModrinthProject": "JygyCSA4"
+          }
+        },
+        {
+          "name": "itemscroller",
+          "identifier": {
+            "GitHubRepository": [
+              "sakura-ryoko",
+              "itemscroller"
+            ]
+          }
+        },
+        {
+          "name": "Krypton",
+          "identifier": {
+            "ModrinthProject": "fQEb0iXm"
+          }
+        },
+        {
+          "name": "libIPN",
+          "identifier": {
+            "ModrinthProject": "onSQdWhM"
+          }
+        },
+        {
+          "name": "LibrGetter",
+          "identifier": {
+            "ModrinthProject": "6Ts2vJ13"
+          }
+        },
+        {
+          "name": "litematica",
+          "identifier": {
+            "GitHubRepository": [
+              "sakura-ryoko",
+              "litematica"
+            ]
+          }
+        },
+        {
+          "name": "Lithium",
+          "identifier": {
+            "ModrinthProject": "gvQqBUqZ"
+          }
+        },
+        {
+          "name": "MaLiLib",
+          "identifier": {
+            "ModrinthProject": "GcWjdA9I"
+          }
+        },
+        {
+          "name": "MiniHUD",
+          "identifier": {
+            "ModrinthProject": "UMxybHE8"
+          }
+        },
+        {
+          "name": "Mod Menu",
+          "identifier": {
+            "ModrinthProject": "mOgUt4GM"
+          }
+        },
+        {
+          "name": "Model Gap Fix",
+          "identifier": {
+            "ModrinthProject": "QdG47OkI"
+          }
+        },
+        {
+          "name": "Modern UI",
+          "identifier": {
+            "ModrinthProject": "3sjzyvGR"
+          }
+        },
+        {
+          "name": "Not Enough Crashes",
+          "identifier": {
+            "ModrinthProject": "yM94ont6"
+          }
+        },
+        {
+          "name": "One World Folder",
+          "identifier": {
+            "ModrinthProject": "JL35Xbzz"
+          }
+        },
+        {
+          "name": "oωo (owo-lib)",
+          "identifier": {
+            "ModrinthProject": "ccKDOlHs"
+          }
+        },
+        {
+          "name": "Reese's Sodium Options",
+          "identifier": {
+            "ModrinthProject": "Bh37bMuy"
+          }
+        },
+        {
+          "name": "ReplayMod",
+          "identifier": {
+            "ModrinthProject": "Nv2fQJo5"
+          }
+        },
+        {
+          "name": "Simple Block Overlay",
+          "identifier": {
+            "ModrinthProject": "Vklwtkf7"
+          }
+        },
+        {
+          "name": "Simple Discord RPC",
+          "identifier": {
+            "ModrinthProject": "ObXSoyrn"
+          }
+        },
+        {
+          "name": "Sodium",
+          "identifier": {
+            "ModrinthProject": "AANobbMI"
+          }
+        },
+        {
+          "name": "Sodium Extra",
+          "identifier": {
+            "ModrinthProject": "PtjYWJkn"
+          }
+        },
+        {
+          "name": "TCDCommons API",
+          "identifier": {
+            "ModrinthProject": "Eldc1g37"
+          }
+        },
+        {
+          "name": "TweakerMore",
+          "identifier": {
+            "ModrinthProject": "GBeCx05I"
+          }
+        },
+        {
+          "name": "Tweakeroo",
+          "identifier": {
+            "ModrinthProject": "t5wuYk45"
+          }
+        },
+        {
+          "name": "WorldEdit",
+          "identifier": {
+            "ModrinthProject": "1u6JkXh5"
+          }
+        },
+        {
+          "name": "Xaero's Minimap",
+          "identifier": {
+            "ModrinthProject": "1bokaNcj"
+          }
+        },
+        {
+          "name": "Xaero's World Map",
+          "identifier": {
+            "ModrinthProject": "NcUtCpym"
+          }
+        },
+        {
+          "name": "YetAnotherConfigLib (YACL)",
+          "identifier": {
+            "ModrinthProject": "1eAoo2KR"
+          }
+        },
+        {
+          "name": "Your Options Shall Be Respected (YOSBR)",
+          "identifier": {
+            "ModrinthProject": "WwbubTsV"
+          }
+        }
+      ]
+    }
+  ]
+}
