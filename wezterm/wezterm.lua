@@ -19,6 +19,7 @@ return {
 
 	color_scheme = "iceberg-dark",
 	default_prog = { "C:/Program Files/PowerShell/7/pwsh.exe", "-nologo" },
+	default_domain = "WSL:Ubuntu",
 	--  if month >= 9 then
 	--    window_background_image =
 	-- window_background_image = "C:/Users/aw5qm/.config/wezterm/anthony-xiong-Bf68Hqnw2zk-unsplash.jpg",
