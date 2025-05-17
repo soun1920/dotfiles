@@ -45,4 +45,5 @@ return {
 	},
 	text_background_opacity = 0.1,
 	enable_scroll_bar = false,
+	automatically_reload_config = true,
 }
