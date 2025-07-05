@@ -164,6 +164,26 @@ return {
       keys[#keys + 1] = { "<space>e", "<cmd>lua vim.diagnostic.open_float()<CR>", desc = "Line Diagnostics" }
       keys[#keys + 1] = { "[d", "<cmd>lua vim.diagnostic.goto_prev()<CR>", desc = "Previous Diagnostic" }
       keys[#keys + 1] = { "]d", "<cmd>lua vim.diagnostic.goto_next()<CR>", desc = "Next Diagnostic" }
+      
+      -- inlay hintの色設定
+      vim.api.nvim_create_autocmd("ColorScheme", {
+        pattern = "*",
+        callback = function()
+          -- inlay hintの色をカスタマイズ
+          vim.api.nvim_set_hl(0, "LspInlayHint", {
+            fg = "#7d8199",      -- 前景色（テキストの色）
+            bg = "NONE",         -- 背景色（透明）
+            italic = true,       -- イタリック体
+          })
+        end,
+      })
+      
+      -- 初回起動時にも適用
+      vim.api.nvim_set_hl(0, "LspInlayHint", {
+        fg = "#7d8199",
+        bg = "NONE", 
+        italic = true,
+      })
     end,
   },
   
@@ -191,10 +211,6 @@ return {
         -- Linters
         "golangci-lint",
         "eslint_d",
-"stylua",
-        "shellcheck",
-        "shfmt",
-        "flake8",
       },
     },
   },
