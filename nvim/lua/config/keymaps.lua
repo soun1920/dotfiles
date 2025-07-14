@@ -8,3 +8,5 @@ map({ "n", "t", "i" }, "<C-k>", ":bnext<CR>", { noremap = true, silent = true })
 map("t", "<C-k>", "<C-\\><C-n>:bnext<CR>", { noremap = true, silent = true })
 
 map("i", "jj", "<Esc>", { silent = true })
+
+map("i", ";;", "<C-o>A;")

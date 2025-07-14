@@ -1,6 +1,6 @@
 return {
   {
-    "cocopon/iceberg.vim",
+    "oahlen/iceberg.nvim",
     config = function()
       -- load the colorscheme here
       vim.cmd([[colorscheme iceberg]])
@@ -36,7 +36,7 @@ return {
     -- install jsregexp (optional!).
     build = "make install_jsregexp",
   },
-  {},
+  { "wakatime/vim-wakatime", lazy = false },
   -- { "neoclide/coc.nvim" },
   { "sainnhe/gruvbox-material" },
   {
