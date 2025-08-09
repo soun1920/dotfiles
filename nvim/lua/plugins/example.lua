@@ -84,8 +84,6 @@ return {
     },
   },
 
-
-
   -- add tsserver and setup with typescript.nvim instead of lspconfig
   {
     "neovim/nvim-lspconfig",
@@ -172,7 +170,6 @@ return {
   },
 
   -- or you can return new options to override all the defaults
-  
 
   -- use mini.starter instead of alpha
   { import = "lazyvim.plugins.extras.ui.mini-starter" },
@@ -181,7 +178,6 @@ return {
   { import = "lazyvim.plugins.extras.lang.json" },
 
   -- add any tools you want to have installed below
- 
 
   -- Use <tab> for completion and snippets (supertab)
   -- first: disable default <tab> and <s-tab> behavior in LuaSnip

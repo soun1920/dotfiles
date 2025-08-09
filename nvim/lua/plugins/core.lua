@@ -1,13 +1,24 @@
 return {
   {
     "oahlen/iceberg.nvim",
-    config = function()
-      -- load the colorscheme here
-      vim.cmd([[colorscheme iceberg]])
-    end,
+    main = "iceberg",
+    lazy = false,
+    opt = {
+      background = "hard",
+    },
   },
   "mattn/vim-lexiv",
   "tpope/vim-surround",
+  {
+    "akinsho/bufferline.nvim",
+    opts = {
+      options = {
+        separator_style = "slant",
+        -- または、よりパディングの入った "padded_slant"
+        -- separator_style = "padded_slant",
+      },
+    },
+  },
   {
     "lambdalisue/fern.vim",
     dependencies = { "lambdalisue/fern-renderer-nerdfont.vim", "lambdalisue/fern-git-status.vim" },

@@ -1,1 +1,5 @@
-{}
+{
+  "coc-rust-analyzer|global": {
+    "release": "2025-06-09"
+  }
+}
