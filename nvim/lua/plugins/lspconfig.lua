@@ -67,17 +67,12 @@ return {
           },
         },
 
-        -- Python
-        pyright = {
-          settings = {
-            python = {
-              pythonPath = vim.fn.getcwd() .. "/.venv/bin/python",
-              analysis = {
-                autoSearchPaths = true,
-                diagnosticMode = "workspace",
-                useLibraryCodeForTypes = true,
-                typeCheckingMode = "basic",
-              },
+        -- Python (ruff-lsp only)
+        pyright = { enabled = false },
+        ruff_lsp = {
+          init_options = {
+            settings = {
+              args = {},
             },
           },
         },
@@ -196,7 +191,7 @@ return {
         -- LSP servers
         "rust-analyzer",
         "gopls",
-        "pyright",
+        "ruff-lsp",
         "typescript-language-server",
         "clangd",
         "lua-language-server",
@@ -204,7 +199,7 @@ return {
         -- Formatters
         "rustfmt",
         "gofumpt",
-        "black",
+        "ruff",
         "prettier",
         "clang-format",
         "stylua",
@@ -215,5 +210,6 @@ return {
       },
     },
   },
+  
 }
 

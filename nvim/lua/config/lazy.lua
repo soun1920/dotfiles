@@ -8,13 +8,13 @@ vim.opt.rtp:prepend(vim.env.LAZY or lazypath)
 
 require("lazy").setup({
   spec = {
-    -- add LazyVim and import its plugins
+    -- 1. LazyVim core plugins
     { "LazyVim/LazyVim", import = "lazyvim.plugins", opts = { colorscheme = "iceberg" } },
-    -- import any extras modules here
-    -- { import = "lazyvim.plugins.extras.lang.typescript" },
-    -- { import = "lazyvim.plugins.extras.lang.json" },
-    -- { import = "lazyvim.plugins.extras.ui.mini-animate" },
-    -- import/override with your plugins
+    -- 2. LazyVim extras
+    { import = "lazyvim.plugins.extras.lang.typescript" },
+    { import = "lazyvim.plugins.extras.lang.json" },
+    { import = "lazyvim.plugins.extras.ui.mini-starter" },
+    -- 3. Your custom plugins
     { import = "plugins" },
     { "folke/snacks.nvim", opts = { dashboard = { enabled = false } } },
   },
