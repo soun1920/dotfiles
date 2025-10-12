@@ -1,2 +1,6 @@
 [tools]
 chezmoi = "latest"
+python = "latest"
+rust = "latest"
+starship = "latest"
+uv = "latest"
