@@ -1,0 +1,179 @@
+# .zshrc 整理版
+export XDG_CONFIG_HOME=${HOME}/.config
+# 履歴ファイルの保存先
+export HISTFILE=${HOME}/.zsh_history
+
+# メモリに保存される履歴の件数
+export HISTSIZE=1000
+
+# 履歴ファイルに保存される履歴の件数
+export SAVEHIST=100000
+
+# 重複を記録しない
+setopt hist_ignore_dups
+
+# 開始と終了を記録
+setopt EXTENDED_HISTORY
+# ----- 環境設定 -----
+# Brew
+eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+
+# PATH 設定
+export PATH="${ASDF_DATA_DIR:-$HOME/.asdf}/shims:$PATH"
+
+# WSL用 X Window System設定
+export DISPLAY=$(cat /etc/resolv.conf | grep nameserver | awk '{print $2}'):0
+
+# ----- プラグイン管理 -----
+# zplug
+source ~/.zplug/init.zsh
+zplug "MichaelAquilina/zsh-autoswitch-virtualenv"
+zplug "zsh-users/zsh-completions", defer:2
+if ! zplug check --verbose; then
+    printf "Install? [y/N]: "
+    if read -q; then
+        echo; zplug install
+    fi
+fi
+source /home/linuxbrew/.linuxbrew/share/zsh-autocomplete/zsh-autocomplete.plugin.zsh
+
+if type brew &>/dev/null; then
+    FPATH=$(brew --prefix)/share/zsh-completions:$FPATH
+
+    autoload -Uz compinit
+    compinit
+  fi
+#補完
+autoload -U compinit
+compinit
+# ----- ツール初期化 -----
+# starship
+eval "$(starship init zsh)"
+
+# direnv
+eval "$(direnv hook zsh)"
+
+# ----- バージョン管理ツール -----
+# fnm (Node.js)
+export PATH="/home/aw5qm/.local/share/fnm:$PATH"
+eval "$(fnm env --use-on-cd --shell zsh)"
+
+# pnpm
+export PNPM_HOME="/home/aw5qm/.local/share/pnpm"
+case ":$PATH:" in
+  *":$PNPM_HOME:"*) ;;
+  *) export PATH="$PNPM_HOME:$PATH" ;;
+esac
+
+# deno
+. "/home/aw5qm/.deno/env"
+
+# env (不明なスクリプト、おそらくユーザー定義)
+. "$HOME/.local/bin/env"
+
+# ----- コマンド補完 -----
+# uv
+eval "$(uv generate-shell-completion zsh)"
+
+# ----- エイリアス -----
+# 開発関連
+alias gc="g++ -std=gnu++20 -O2 -Wall -Wextra"
+alias ac="gc main.cpp && oj t"
+alias python="python3"
+# Python仮想環境
+alias actv="source .venv/bin/activate"
+alias activate="source .venv/bin/activate"  # 同じコマンドの別名
+
+# ディレクトリ移動
+alias cdp='cd "/mnt/c/Users/aw5qm/OneDrive - Kogakuin University/個人用"'
+alias cdc= "cd /home/aw5qm/.config"
+alias cda='cd "/mnt/c/Users/aw5qm/OneDrive - Kogakuin University/個人用/atcoder/"'
+# コマンド置き換え
+alias cat="bat"
+alias ssh='ssh.exe'
+alias ssh-add='ssh-add.exe'
+alias ll="ls -l"
+export ZED_ALLOW_EMULATED_GPU=1
+alias zed="WAYLAND_DISPLAY= zed"
+alias cpp='g++ -std=gnu++20 -O2 -Wall -Wextra main.cpp'
+# 競プロ用
+nd() {
+    local current_dir=$(basename "$PWD")
+    local next_dir=""
+    
+    case "$current_dir" in
+        "a") next_dir="b" ;;
+        "b") next_dir="c" ;;
+        "c") next_dir="d" ;;
+        "d") next_dir="e" ;;
+        "e") next_dir="f" ;;
+        "f") next_dir="g" ;;
+        "g") next_dir="a" ;;
+        *) next_dir="" ;;
+    esac
+    
+    if [[ -z "$next_dir" ]]; then
+        echo "エラー: 現在のディレクトリは対象外です"
+        echo "対象: a b c d e f g"
+        return 1
+    fi
+    
+    cd "../$next_dir" && echo "$current_dir → $next_dir"
+}
+
+cpp_test() {
+    local cpp_file="${1:-main.cpp}"
+    zsh -c "g++ -std=gnu++20 -O2 -Wall -Wextra main.cpp"
+    
+    
+    # コマンドを実行して結果を取得
+    local res=$(timeout 5s oj t 2>&1)
+    local exit_code=$?
+    if [[ $exit_code -eq 124 ]]; then
+        echo "timeout"
+        return 1
+    fi
+    
+    # 結果を表示
+    local result=$(eval "unbuffer oj t" 2>&1)
+    echo "$result"
+    
+    # 成功パターンをチェック（複数のパターンに対応）
+    if echo "$res" | grep -E "\[SUCCESS\]|test success|All tests passed" >/dev/null 2>&1; then
+        cat "main.cpp" | copy_to_clipboard
+        echo "copied to clipboard"
+    else
+        echo "nanimoshinai"
+        return $exit_code
+    fi
+}
+
+alias ot="cpp_test"
+
+
+# クリップボードにコピーする関数（OS別対応）
+copy_to_clipboard() {
+    if command -v pbcopy >/dev/null 2>&1; then
+        # macOS
+        pbcopy
+    elif command -v xclip >/dev/null 2>&1; then
+        # Linux (X11)
+        xclip -selection clipboard
+    elif command -v xsel >/dev/null 2>&1; then
+        # Linux (alternative)
+        xsel --clipboard --input
+    elif command -v clip.exe >/dev/null 2>&1; then
+        # Windows (WSL)
+        clip.exe
+    else
+        echo "Warning: クリップボードにコピーできませんでした（対応するコマンドが見つかりません）"
+        cat  # 標準出力に表示のみ
+        return 1
+    fi
+}
+source /home/linuxbrew/.linuxbrew/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+
+
+zplug load
+eval "$(~/.local/bin/mise activate zsh)"
+eval "$(/home/aw5qm/.local/bin/mise activate zsh)"

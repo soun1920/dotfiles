@@ -1,0 +1,5 @@
+[core]
+	sshCommand = ssh.exe
+[user]
+	name = soun1920
+	email = soun29300@gmail.com
