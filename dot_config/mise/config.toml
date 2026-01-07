@@ -5,6 +5,10 @@ ghq = "latest"
 neovim = "latest"
 node = "latest"
 starship = "latest"
+python = "latest"
+rust = "latest"
+starship = "latest"
+uv = "latest"
 
 [settings]
 idiomatic_version_file_enable_tools = ["python"]
