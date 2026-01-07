@@ -34,7 +34,7 @@ return {
             },
           },
         },
-        
+
         -- Go
         gopls = {
           settings = {
@@ -66,49 +66,45 @@ return {
             },
           },
         },
-        
-        -- Python
-        pyright = {
-          settings = {
-            python = {
-              analysis = {
-                autoSearchPaths = true,
-                diagnosticMode = "workspace",
-                useLibraryCodeForTypes = true,
-                typeCheckingMode = "basic",
-              },
+
+        -- Python (ruff-lsp only)
+        pyright = { enabled = false },
+        ruff_lsp = {
+          init_options = {
+            settings = {
+              args = {},
             },
           },
         },
-        
+
         -- TypeScript/JavaScript
         tsserver = {
           settings = {
             typescript = {
               inlayHints = {
-                includeInlayParameterNameHints = 'all',
+                includeInlayParameterNameHints = "all",
                 includeInlayParameterNameHintsWhenArgumentMatchesName = false,
                 includeInlayFunctionParameterTypeHints = true,
                 includeInlayVariableTypeHints = true,
                 includeInlayPropertyDeclarationTypeHints = true,
                 includeInlayFunctionLikeReturnTypeHints = true,
                 includeInlayEnumMemberValueHints = true,
-              }
+              },
             },
             javascript = {
               inlayHints = {
-                includeInlayParameterNameHints = 'all',
+                includeInlayParameterNameHints = "all",
                 includeInlayParameterNameHintsWhenArgumentMatchesName = false,
                 includeInlayFunctionParameterTypeHints = true,
                 includeInlayVariableTypeHints = true,
                 includeInlayPropertyDeclarationTypeHints = true,
                 includeInlayFunctionLikeReturnTypeHints = true,
                 includeInlayEnumMemberValueHints = true,
-              }
-            }
+              },
+            },
           },
         },
-        
+
         -- C/C++
         clangd = {
           cmd = {
@@ -126,7 +122,7 @@ return {
             clangdFileStatus = true,
           },
         },
-        
+
         -- Lua
         lua_ls = {
           settings = {
@@ -152,7 +148,7 @@ return {
     init = function()
       -- キーマップ設定
       local keys = require("lazyvim.plugins.lsp.keymaps").get()
-      
+
       -- カスタムキーマップを追加
       keys[#keys + 1] = { "gd", "<cmd>lua vim.lsp.buf.definition()<CR>", desc = "Goto Definition" }
       keys[#keys + 1] = { "K", "<cmd>lua vim.lsp.buf.hover()<CR>", desc = "Hover" }
@@ -164,29 +160,29 @@ return {
       keys[#keys + 1] = { "<space>e", "<cmd>lua vim.diagnostic.open_float()<CR>", desc = "Line Diagnostics" }
       keys[#keys + 1] = { "[d", "<cmd>lua vim.diagnostic.goto_prev()<CR>", desc = "Previous Diagnostic" }
       keys[#keys + 1] = { "]d", "<cmd>lua vim.diagnostic.goto_next()<CR>", desc = "Next Diagnostic" }
-      
+
       -- inlay hintの色設定
       vim.api.nvim_create_autocmd("ColorScheme", {
         pattern = "*",
         callback = function()
           -- inlay hintの色をカスタマイズ
           vim.api.nvim_set_hl(0, "LspInlayHint", {
-            fg = "#7d8199",      -- 前景色（テキストの色）
-            bg = "NONE",         -- 背景色（透明）
-            italic = true,       -- イタリック体
+            fg = "#7d8199", -- 前景色（テキストの色）
+            bg = "NONE", -- 背景色（透明）
+            italic = true, -- イタリック体
           })
         end,
       })
-      
+
       -- 初回起動時にも適用
       vim.api.nvim_set_hl(0, "LspInlayHint", {
         fg = "#7d8199",
-        bg = "NONE", 
+        bg = "NONE",
         italic = true,
       })
     end,
   },
-  
+
   -- Mason設定（LSPサーバー自動インストール）
   {
     "williamboman/mason.nvim",
@@ -194,24 +190,26 @@ return {
       ensure_installed = {
         -- LSP servers
         "rust-analyzer",
-        "gopls", 
-        "pyright",
+        "gopls",
+        "ruff-lsp",
         "typescript-language-server",
         "clangd",
         "lua-language-server",
-        
+
         -- Formatters
         "rustfmt",
         "gofumpt",
-        "black",
+        "ruff",
         "prettier",
         "clang-format",
         "stylua",
-        
+
         -- Linters
         "golangci-lint",
         "eslint_d",
       },
     },
   },
+  
 }
+

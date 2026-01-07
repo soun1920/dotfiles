@@ -1,2 +1,10 @@
 [tools]
 chezmoi = "latest"
+fzf = "latest"
+ghq = "latest"
+neovim = "latest"
+node = "latest"
+starship = "latest"
+
+[settings]
+idiomatic_version_file_enable_tools = ["python"]
