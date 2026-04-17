@@ -289,11 +289,6 @@ target_linux = "/home/aw5qm/.claude/CLAUDE.md"
 added_at = "2026-04-17T17:05:39"
 
 [[files]]
-source = ".claude.json"
-target_linux = "/home/aw5qm/.claude.json"
-added_at = "2026-04-17T17:05:39"
-
-[[files]]
 source = ".claude/statusline.py"
 target_linux = "/home/aw5qm/.claude/statusline.py"
 added_at = "2026-04-17T17:05:39"
