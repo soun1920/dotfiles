@@ -1,8 +1,0 @@
-{{- if eq .chezmoi.os "windows" }}
-$configPath = "$env:LOCALAPPDATA\nvim"
-$targetPath = "$HOME\.config\nvim"
-
-If (-Not (Test-Path $configPath)) {
-    New-Item -ItemType Junction -Path $configPath -Target $targetPath
-}
-{{- end }}
