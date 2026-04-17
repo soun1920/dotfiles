@@ -1,0 +1,45 @@
+(deflocalkeys-linux
+  muhenkan 94
+  henkan   92
+  kana     93
+  yen      124
+  ro       89
+)
+
+(defcfg
+  process-unmapped-keys yes
+  log-layer-changes yes
+)
+
+(defsrc
+  grv 1 2 3 4 5 6 7 8 9 0 - = yen bspc
+  tab q w e r t y u i o p [ ]
+  caps a s d f g h j k l ; ' \ ret
+  lsft ro z x c v b n m , . / rsft
+  lctl lmet lalt muhenkan spc henkan kana ralt rmet rctl
+)
+
+(deflayer default
+  _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+  _ _ _ _ _ _ _ _ _ _ _ _ _
+  @cap _ _ _ _ _ _ _ _ _ _ _ _ _
+  _ _ _ _ _ _ _ _ _ _ _ _ _
+  _ _ _ _ _ _ _ _ _ _
+)
+
+(deflayer cap-mod
+  _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+  _ _ _ _ _ _ _ _ _ _ _ _ _
+  _ _ _ _ _ _ left down up rght _ _ _ _
+  _ _ _ _ _ _ _ _ _ _ _ _ _
+  _ _ _ _ _ _ _ _ _ _
+)
+
+(defvar
+  tap-time 200
+  hold-time 250
+)
+
+(defalias
+  cap (tap-hold-press $tap-time $hold-time esc (layer-while-held cap-mod))
+)

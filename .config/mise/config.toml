@@ -1,0 +1,19 @@
+
+[tools]
+chezmoi = "latest"
+direnv = "latest"
+fzf = "latest"
+ghq = "latest"
+go = "latest"
+neovim = "latest"
+node = "latest"
+pnpm = "latest"
+python = "latest"
+rust = "latest"
+starship = "latest"
+uv = "latest"
+yazi = "latest"
+yt-dlp = "latest"
+
+[settings]
+idiomatic_version_file_enable_tools = ["python"]
