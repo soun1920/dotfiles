@@ -300,6 +300,7 @@ later(function()
     add({ source = "hrsh7th/cmp-path" })
     add({ source = "hrsh7th/cmp-emoji" })
     add({ source = "saadparwaiz1/cmp_luasnip" })
+    add({ source = "dnlhc/glance.nvim" })
 
     require("config.lsp")
 end)
