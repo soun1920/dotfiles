@@ -1,0 +1,152 @@
+# ~/.config/starship.toml
+
+# Iceberg カラーパレット
+# bg:      #161821
+# fg:      #c6c8d1
+# blue:    #84a0c6
+# green:   #b4be82
+# red:     #e27878
+# orange:  #e2a478
+# purple:  #a093c7
+# cyan:    #89b8c2
+# gray:    #6b7089
+
+format = """
+[╭──](fg:#6b7089)[$directory](bold fg:#84a0c6)([ ─ ](fg:#6b7089)$git_branch $git_status)([ ─ ](fg:#6b7089)$python$nodejs$rust$golang$java$lua$docker_context$package)
+[╰─>](fg:#6b7089) """
+
+right_format = """$cmd_duration$time"""
+
+add_newline = true
+
+# ディレクトリ
+[directory]
+style = "bold fg:#84a0c6"
+truncation_length = 5
+format = "[ $path]($style)"
+read_only = " 󰌾"
+read_only_style = "fg:#e27878"
+
+# Git ブランチ
+[git_branch]
+symbol = " "
+style = "fg:#b4be82"
+format = "[$symbol$branch]($style) "
+
+# Git ステータス
+[git_status]
+style = "fg:#e27878"
+format = "[$all_status$ahead_behind]($style) "
+ahead = "↑"
+behind = "↓"
+diverged = "󰙒"
+modified = ""
+staged = ""
+untracked = ""
+deleted = ""
+renamed = ""
+stashed = ""
+
+# ユーザー名
+[username]
+show_always = false
+style_user = "fg:#a093c7"
+format = "[ $user]($style_user)@"
+
+[hostname]
+ssh_only = true
+style = "fg:#a093c7"
+format = "[$ssh_symbol$hostname]($style)"
+ssh_symbol = "󰣀 "
+
+# Python
+[python]
+symbol = " "
+style = "fg:#e2a478"
+format = "[$symbol$version( $virtualenv)]($style) "
+
+# Node.js
+[nodejs]
+symbol = " "
+style = "fg:#b4be82"
+format = "[$symbol$version]($style) "
+
+# Rust
+[rust]
+symbol = " "
+style = "fg:#e27878"
+format = "[$symbol$version]($style) "
+
+# Go
+[golang]
+symbol = "󰟓 "
+style = "fg:#89b8c2"
+format = "[$symbol$version]($style) "
+
+# Java
+[java]
+symbol = " "
+style = "fg:#e27878"
+format = "[$symbol$version]($style) "
+
+# Lua
+[lua]
+symbol = " "
+style = "fg:#84a0c6"
+format = "[$symbol$version]($style) "
+
+# C/C++
+[c]
+symbol = " "
+style = "fg:#84a0c6"
+format = "[$symbol$name$version]($style) "
+
+# Docker
+[docker_context]
+symbol = " "
+style = "fg:#89b8c2"
+format = "[$symbol$context]($style) "
+
+# Package version
+[package]
+symbol = "󰏗 "
+style = "fg:#e2a478"
+format = "[$symbol$version]($style) "
+
+# コマンド実行時間
+[cmd_duration]
+min_time = 2000
+style = "fg:#6b7089"
+format = "[ $duration]($style)"
+
+# 時刻（任意）
+[time]
+disabled = true
+style = "fg:#6b7089"
+format = "[  $time]($style)"
+time_format = "%H:%M"
+
+# メモリ使用量（任意）
+[memory_usage]
+disabled = true
+symbol = "󰍛 "
+style = "fg:#6b7089"
+format = "[$symbol$ram]($style) "
+
+# バッテリー（任意）
+[battery]
+disabled = true
+
+[[battery.display]]
+threshold = 30
+style = "fg:#e27878"
+
+# AWS
+[aws]
+symbol = " "
+style = "fg:#e2a478"
+format = "[$symbol$profile]($style) "
+
+# 成功/失敗のキャラクター
+[character]
+disabled = true
