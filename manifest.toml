@@ -1,515 +1,678 @@
 [[files]]
 source = ".config/nvim/.gitignore"
 target_linux = "~/.config/nvim/.gitignore"
+target_macos = "~/.config/nvim/.gitignore"
+target_windows = "~/AppData/Local/nvim/.gitignore"
 added_at = "2026-04-17T17:05:39"
 
 [[files]]
 source = ".config/nvim/.neoconf.json"
 target_linux = "~/.config/nvim/.neoconf.json"
+target_macos = "~/.config/nvim/.neoconf.json"
+target_windows = "~/AppData/Local/nvim/.neoconf.json"
 added_at = "2026-04-17T17:05:39"
 
 [[files]]
 source = ".config/nvim/LICENSE"
 target_linux = "~/.config/nvim/LICENSE"
+target_macos = "~/.config/nvim/LICENSE"
+target_windows = "~/AppData/Local/nvim/LICENSE"
 added_at = "2026-04-17T17:05:39"
 
 [[files]]
 source = ".config/nvim/README.md"
 target_linux = "~/.config/nvim/README.md"
+target_macos = "~/.config/nvim/README.md"
+target_windows = "~/AppData/Local/nvim/README.md"
 added_at = "2026-04-17T17:05:39"
 
 [[files]]
 source = ".config/nvim/after/ftplugin/cpp.lua"
 target_linux = "~/.config/nvim/after/ftplugin/cpp.lua"
+target_macos = "~/.config/nvim/after/ftplugin/cpp.lua"
+target_windows = "~/AppData/Local/nvim/after/ftplugin/cpp.lua"
 added_at = "2026-04-17T17:05:39"
 
 [[files]]
 source = ".config/nvim/lua/config/conform.lua"
 target_linux = "~/.config/nvim/lua/config/conform.lua"
+target_macos = "~/.config/nvim/lua/config/conform.lua"
+target_windows = "~/AppData/Local/nvim/lua/config/conform.lua"
 added_at = "2026-04-17T17:05:39"
 
 [[files]]
 source = ".config/nvim/lua/config/lsp.lua"
 target_linux = "~/.config/nvim/lua/config/lsp.lua"
+target_macos = "~/.config/nvim/lua/config/lsp.lua"
+target_windows = "~/AppData/Local/nvim/lua/config/lsp.lua"
 added_at = "2026-04-17T17:05:39"
 
 [[files]]
 source = ".config/nvim/lua/plugins/typst.lua"
 target_linux = "~/.config/nvim/lua/plugins/typst.lua"
+target_macos = "~/.config/nvim/lua/plugins/typst.lua"
+target_windows = "~/AppData/Local/nvim/lua/plugins/typst.lua"
 added_at = "2026-04-17T17:05:39"
 
 [[files]]
 source = ".config/nvim/stylua.toml"
 target_linux = "~/.config/nvim/stylua.toml"
+target_macos = "~/.config/nvim/stylua.toml"
+target_windows = "~/AppData/Local/nvim/stylua.toml"
 added_at = "2026-04-17T17:05:39"
 
 [[files]]
 source = ".config/nvim/colors/sigewinne-hydro.lua"
 target_linux = "~/.config/nvim/colors/sigewinne-hydro.lua"
+target_macos = "~/.config/nvim/colors/sigewinne-hydro.lua"
+target_windows = "~/AppData/Local/nvim/colors/sigewinne-hydro.lua"
 added_at = "2026-04-17T17:05:39"
 
 [[files]]
 source = ".config/nvim/init.lua"
 target_linux = "~/.config/nvim/init.lua"
+target_macos = "~/.config/nvim/init.lua"
+target_windows = "~/AppData/Local/nvim/init.lua"
 added_at = "2026-04-17T17:05:39"
 
 [[files]]
 source = ".config/wezterm/images/wallpaper.jpg"
 target_linux = "~/.config/wezterm/images/wallpaper.jpg"
+target_macos = "~/.config/wezterm/images/wallpaper.jpg"
+target_windows = "~/AppData/Roaming/wezterm/images/wallpaper.jpg"
 added_at = "2026-04-17T17:05:39"
 
 [[files]]
 source = ".config/wezterm/wezterm.lua"
 target_linux = "~/.config/wezterm/wezterm.lua"
+target_macos = "~/.config/wezterm/wezterm.lua"
+target_windows = "~/AppData/Roaming/wezterm/wezterm.lua"
 added_at = "2026-04-17T17:05:39"
 
 [[files]]
 source = ".config/ghostty/config"
 target_linux = "~/.config/ghostty/config"
+target_macos = "~/.config/ghostty/config"
 added_at = "2026-04-17T17:05:39"
 
 [[files]]
 source = ".config/mise/config.toml"
 target_linux = "~/.config/mise/config.toml"
+target_macos = "~/.config/mise/config.toml"
+target_windows = "~/AppData/Roaming/mise/config.toml"
 added_at = "2026-04-17T17:05:39"
 
 [[files]]
 source = ".config/tmux/.tmux.conf"
 target_linux = "~/.config/tmux/.tmux.conf"
+target_macos = "~/.config/tmux/.tmux.conf"
 added_at = "2026-04-17T17:05:39"
 
 [[files]]
 source = ".config/fish/completions/fisher.fish"
 target_linux = "~/.config/fish/completions/fisher.fish"
+target_macos = "~/.config/fish/completions/fisher.fish"
+target_windows = "~/AppData/Roaming/fish/completions/fisher.fish"
 added_at = "2026-04-17T17:05:39"
 
 [[files]]
 source = ".config/fish/completions/fzf_configure_bindings.fish"
 target_linux = "~/.config/fish/completions/fzf_configure_bindings.fish"
+target_macos = "~/.config/fish/completions/fzf_configure_bindings.fish"
+target_windows = "~/AppData/Roaming/fish/completions/fzf_configure_bindings.fish"
 added_at = "2026-04-17T17:05:39"
 
 [[files]]
 source = ".config/fish/completions/mise.fish"
 target_linux = "~/.config/fish/completions/mise.fish"
+target_macos = "~/.config/fish/completions/mise.fish"
+target_windows = "~/AppData/Roaming/fish/completions/mise.fish"
 added_at = "2026-04-17T17:05:39"
 
 [[files]]
 source = ".config/fish/completions/tailscale.fish"
 target_linux = "~/.config/fish/completions/tailscale.fish"
+target_macos = "~/.config/fish/completions/tailscale.fish"
+target_windows = "~/AppData/Roaming/fish/completions/tailscale.fish"
 added_at = "2026-04-17T17:05:39"
 
 [[files]]
 source = ".config/fish/conf.d/fish_iceberg_theme.fish"
 target_linux = "~/.config/fish/conf.d/fish_iceberg_theme.fish"
+target_macos = "~/.config/fish/conf.d/fish_iceberg_theme.fish"
+target_windows = "~/AppData/Roaming/fish/conf.d/fish_iceberg_theme.fish"
 added_at = "2026-04-17T17:05:39"
 
 [[files]]
 source = ".config/fish/conf.d/fzf.fish"
 target_linux = "~/.config/fish/conf.d/fzf.fish"
+target_macos = "~/.config/fish/conf.d/fzf.fish"
+target_windows = "~/AppData/Roaming/fish/conf.d/fzf.fish"
 added_at = "2026-04-17T17:05:39"
 
 [[files]]
 source = ".config/fish/conf.d/z.fish"
 target_linux = "~/.config/fish/conf.d/z.fish"
+target_macos = "~/.config/fish/conf.d/z.fish"
+target_windows = "~/AppData/Roaming/fish/conf.d/z.fish"
 added_at = "2026-04-17T17:05:39"
 
 [[files]]
 source = ".config/fish/functions/__z.fish"
 target_linux = "~/.config/fish/functions/__z.fish"
+target_macos = "~/.config/fish/functions/__z.fish"
+target_windows = "~/AppData/Roaming/fish/functions/__z.fish"
 added_at = "2026-04-17T17:05:39"
 
 [[files]]
 source = ".config/fish/functions/__z_add.fish"
 target_linux = "~/.config/fish/functions/__z_add.fish"
+target_macos = "~/.config/fish/functions/__z_add.fish"
+target_windows = "~/AppData/Roaming/fish/functions/__z_add.fish"
 added_at = "2026-04-17T17:05:39"
 
 [[files]]
 source = ".config/fish/functions/__z_clean.fish"
 target_linux = "~/.config/fish/functions/__z_clean.fish"
+target_macos = "~/.config/fish/functions/__z_clean.fish"
+target_windows = "~/AppData/Roaming/fish/functions/__z_clean.fish"
 added_at = "2026-04-17T17:05:39"
 
 [[files]]
 source = ".config/fish/functions/__z_complete.fish"
 target_linux = "~/.config/fish/functions/__z_complete.fish"
+target_macos = "~/.config/fish/functions/__z_complete.fish"
+target_windows = "~/AppData/Roaming/fish/functions/__z_complete.fish"
 added_at = "2026-04-17T17:05:39"
 
 [[files]]
 source = ".config/fish/functions/_fzf_configure_bindings_help.fish"
 target_linux = "~/.config/fish/functions/_fzf_configure_bindings_help.fish"
+target_macos = "~/.config/fish/functions/_fzf_configure_bindings_help.fish"
+target_windows = "~/AppData/Roaming/fish/functions/_fzf_configure_bindings_help.fish"
 added_at = "2026-04-17T17:05:39"
 
 [[files]]
 source = ".config/fish/functions/_fzf_extract_var_info.fish"
 target_linux = "~/.config/fish/functions/_fzf_extract_var_info.fish"
+target_macos = "~/.config/fish/functions/_fzf_extract_var_info.fish"
+target_windows = "~/AppData/Roaming/fish/functions/_fzf_extract_var_info.fish"
 added_at = "2026-04-17T17:05:39"
 
 [[files]]
 source = ".config/fish/functions/_fzf_preview_changed_file.fish"
 target_linux = "~/.config/fish/functions/_fzf_preview_changed_file.fish"
+target_macos = "~/.config/fish/functions/_fzf_preview_changed_file.fish"
+target_windows = "~/AppData/Roaming/fish/functions/_fzf_preview_changed_file.fish"
 added_at = "2026-04-17T17:05:39"
 
 [[files]]
 source = ".config/fish/functions/_fzf_preview_file.fish"
 target_linux = "~/.config/fish/functions/_fzf_preview_file.fish"
+target_macos = "~/.config/fish/functions/_fzf_preview_file.fish"
+target_windows = "~/AppData/Roaming/fish/functions/_fzf_preview_file.fish"
 added_at = "2026-04-17T17:05:39"
 
 [[files]]
 source = ".config/fish/functions/_fzf_report_diff_type.fish"
 target_linux = "~/.config/fish/functions/_fzf_report_diff_type.fish"
+target_macos = "~/.config/fish/functions/_fzf_report_diff_type.fish"
+target_windows = "~/AppData/Roaming/fish/functions/_fzf_report_diff_type.fish"
 added_at = "2026-04-17T17:05:39"
 
 [[files]]
 source = ".config/fish/functions/_fzf_report_file_type.fish"
 target_linux = "~/.config/fish/functions/_fzf_report_file_type.fish"
+target_macos = "~/.config/fish/functions/_fzf_report_file_type.fish"
+target_windows = "~/AppData/Roaming/fish/functions/_fzf_report_file_type.fish"
 added_at = "2026-04-17T17:05:39"
 
 [[files]]
 source = ".config/fish/functions/_fzf_search_directory.fish"
 target_linux = "~/.config/fish/functions/_fzf_search_directory.fish"
+target_macos = "~/.config/fish/functions/_fzf_search_directory.fish"
+target_windows = "~/AppData/Roaming/fish/functions/_fzf_search_directory.fish"
 added_at = "2026-04-17T17:05:39"
 
 [[files]]
 source = ".config/fish/functions/_fzf_search_git_log.fish"
 target_linux = "~/.config/fish/functions/_fzf_search_git_log.fish"
+target_macos = "~/.config/fish/functions/_fzf_search_git_log.fish"
+target_windows = "~/AppData/Roaming/fish/functions/_fzf_search_git_log.fish"
 added_at = "2026-04-17T17:05:39"
 
 [[files]]
 source = ".config/fish/functions/_fzf_search_git_status.fish"
 target_linux = "~/.config/fish/functions/_fzf_search_git_status.fish"
+target_macos = "~/.config/fish/functions/_fzf_search_git_status.fish"
+target_windows = "~/AppData/Roaming/fish/functions/_fzf_search_git_status.fish"
 added_at = "2026-04-17T17:05:39"
 
 [[files]]
 source = ".config/fish/functions/_fzf_search_history.fish"
 target_linux = "~/.config/fish/functions/_fzf_search_history.fish"
+target_macos = "~/.config/fish/functions/_fzf_search_history.fish"
+target_windows = "~/AppData/Roaming/fish/functions/_fzf_search_history.fish"
 added_at = "2026-04-17T17:05:39"
 
 [[files]]
 source = ".config/fish/functions/_fzf_search_processes.fish"
 target_linux = "~/.config/fish/functions/_fzf_search_processes.fish"
+target_macos = "~/.config/fish/functions/_fzf_search_processes.fish"
+target_windows = "~/AppData/Roaming/fish/functions/_fzf_search_processes.fish"
 added_at = "2026-04-17T17:05:39"
 
 [[files]]
 source = ".config/fish/functions/_fzf_search_variables.fish"
 target_linux = "~/.config/fish/functions/_fzf_search_variables.fish"
+target_macos = "~/.config/fish/functions/_fzf_search_variables.fish"
+target_windows = "~/AppData/Roaming/fish/functions/_fzf_search_variables.fish"
 added_at = "2026-04-17T17:05:39"
 
 [[files]]
 source = ".config/fish/functions/_fzf_wrapper.fish"
 target_linux = "~/.config/fish/functions/_fzf_wrapper.fish"
+target_macos = "~/.config/fish/functions/_fzf_wrapper.fish"
+target_windows = "~/AppData/Roaming/fish/functions/_fzf_wrapper.fish"
 added_at = "2026-04-17T17:05:39"
 
 [[files]]
 source = ".config/fish/functions/fish_prompt.fish"
 target_linux = "~/.config/fish/functions/fish_prompt.fish"
+target_macos = "~/.config/fish/functions/fish_prompt.fish"
+target_windows = "~/AppData/Roaming/fish/functions/fish_prompt.fish"
 added_at = "2026-04-17T17:05:39"
 
 [[files]]
 source = ".config/fish/functions/fisher.fish"
 target_linux = "~/.config/fish/functions/fisher.fish"
+target_macos = "~/.config/fish/functions/fisher.fish"
+target_windows = "~/AppData/Roaming/fish/functions/fisher.fish"
 added_at = "2026-04-17T17:05:39"
 
 [[files]]
 source = ".config/fish/functions/fzf_configure_bindings.fish"
 target_linux = "~/.config/fish/functions/fzf_configure_bindings.fish"
+target_macos = "~/.config/fish/functions/fzf_configure_bindings.fish"
+target_windows = "~/AppData/Roaming/fish/functions/fzf_configure_bindings.fish"
 added_at = "2026-04-17T17:05:39"
 
 [[files]]
 source = ".config/fish/functions/togglekey.fish"
 target_linux = "~/.config/fish/functions/togglekey.fish"
+target_macos = "~/.config/fish/functions/togglekey.fish"
+target_windows = "~/AppData/Roaming/fish/functions/togglekey.fish"
 added_at = "2026-04-17T17:05:39"
 
 [[files]]
 source = ".config/fish/fish_plugins"
 target_linux = "~/.config/fish/fish_plugins"
+target_macos = "~/.config/fish/fish_plugins"
+target_windows = "~/AppData/Roaming/fish/fish_plugins"
 added_at = "2026-04-17T17:05:39"
 
 [[files]]
 source = ".config/fish/themes/fish_iceberg_theme.fish"
 target_linux = "~/.config/fish/themes/fish_iceberg_theme.fish"
+target_macos = "~/.config/fish/themes/fish_iceberg_theme.fish"
+target_windows = "~/AppData/Roaming/fish/themes/fish_iceberg_theme.fish"
 added_at = "2026-04-17T17:05:39"
 
 [[files]]
 source = ".config/fish/config.fish"
 target_linux = "~/.config/fish/config.fish"
+target_macos = "~/.config/fish/config.fish"
+target_windows = "~/AppData/Roaming/fish/config.fish"
 added_at = "2026-04-17T17:05:39"
 
 [[files]]
 source = ".config/fish/fish_variables"
 target_linux = "~/.config/fish/fish_variables"
+target_macos = "~/.config/fish/fish_variables"
+target_windows = "~/AppData/Roaming/fish/fish_variables"
 added_at = "2026-04-17T17:05:39"
 
 [[files]]
 source = ".config/kanata/kanata.kbd"
 target_linux = "~/.config/kanata/kanata.kbd"
+target_macos = "~/.config/kanata/kanata.kbd"
+target_windows = "~/AppData/Roaming/kanata/kanata.kbd"
 added_at = "2026-04-17T17:05:39"
 
 [[files]]
 source = ".config/lazygit/config.yml"
 target_linux = "~/.config/lazygit/config.yml"
+target_macos = "~/Library/Application Support/lazygit/config.yml"
+target_windows = "~/AppData/Roaming/lazygit/config.yml"
 added_at = "2026-04-17T17:05:39"
 
 [[files]]
 source = ".config/zed/keymap.json"
 target_linux = "~/.config/zed/keymap.json"
+target_macos = "~/.config/zed/keymap.json"
+target_windows = "~/AppData/Roaming/Zed/keymap.json"
 added_at = "2026-04-17T17:05:39"
 
 [[files]]
 source = ".config/zed/tasks.json"
 target_linux = "~/.config/zed/tasks.json"
+target_macos = "~/.config/zed/tasks.json"
+target_windows = "~/AppData/Roaming/Zed/tasks.json"
 added_at = "2026-04-17T17:05:39"
 
 [[files]]
 source = ".config/zed/debug.json"
 target_linux = "~/.config/zed/debug.json"
+target_macos = "~/.config/zed/debug.json"
+target_windows = "~/AppData/Roaming/Zed/debug.json"
 added_at = "2026-04-17T17:05:39"
 
 [[files]]
 source = ".config/zed/snippets/c++.json"
 target_linux = "~/.config/zed/snippets/c++.json"
+target_macos = "~/.config/zed/snippets/c++.json"
+target_windows = "~/AppData/Roaming/Zed/snippets/c++.json"
 added_at = "2026-04-17T17:05:39"
 
 [[files]]
 source = ".config/zed/settings.json"
 target_linux = "~/.config/zed/settings.json"
+target_macos = "~/.config/zed/settings.json"
+target_windows = "~/AppData/Roaming/Zed/settings.json"
 added_at = "2026-04-17T17:05:39"
 
 [[files]]
 source = ".config/zellij/config.kdl.bak"
 target_linux = "~/.config/zellij/config.kdl.bak"
+target_macos = "~/.config/zellij/config.kdl.bak"
+target_windows = "~/AppData/Roaming/zellij/config.kdl.bak"
 added_at = "2026-04-17T17:05:39"
 
 [[files]]
 source = ".config/zellij/config.kdl"
 target_linux = "~/.config/zellij/config.kdl"
+target_macos = "~/.config/zellij/config.kdl"
+target_windows = "~/AppData/Roaming/zellij/config.kdl"
 added_at = "2026-04-17T17:05:39"
 
 [[files]]
 source = ".claude/CLAUDE.md"
 target_linux = "~/.claude/CLAUDE.md"
+target_macos = "~/.claude/CLAUDE.md"
+target_windows = "~/.claude/CLAUDE.md"
 added_at = "2026-04-17T17:05:39"
 
 [[files]]
 source = ".claude/statusline.py"
 target_linux = "~/.claude/statusline.py"
+target_macos = "~/.claude/statusline.py"
+target_windows = "~/.claude/statusline.py"
 added_at = "2026-04-17T17:05:39"
 
 [[files]]
 source = ".claude/settings.json"
 target_linux = "~/.claude/settings.json"
+target_macos = "~/.claude/settings.json"
+target_windows = "~/.claude/settings.json"
 added_at = "2026-04-17T17:05:39"
 
 [[files]]
 source = ".zshrc"
 target_linux = "~/.zshrc"
+target_macos = "~/.zshrc"
 added_at = "2026-04-17T17:11:05"
 
 [[files]]
 source = "nix-config/home/packages.nix"
 target_linux = "~/nix-config/home/packages.nix"
+target_macos = "~/nix-config/home/packages.nix"
 added_at = "2026-04-17T17:12:13"
 
 [[files]]
 source = "nix-config/home/shell.nix"
 target_linux = "~/nix-config/home/shell.nix"
+target_macos = "~/nix-config/home/shell.nix"
 added_at = "2026-04-17T17:12:13"
 
 [[files]]
 source = "nix-config/home/starship.nix"
 target_linux = "~/nix-config/home/starship.nix"
+target_macos = "~/nix-config/home/starship.nix"
 added_at = "2026-04-17T17:12:13"
 
 [[files]]
 source = "nix-config/home/ssh.nix"
 target_linux = "~/nix-config/home/ssh.nix"
+target_macos = "~/nix-config/home/ssh.nix"
 added_at = "2026-04-17T17:12:13"
 
 [[files]]
 source = "nix-config/home/ghostty.nix"
 target_linux = "~/nix-config/home/ghostty.nix"
+target_macos = "~/nix-config/home/ghostty.nix"
 added_at = "2026-04-17T17:12:13"
 
 [[files]]
 source = "nix-config/home/zellij.nix"
 target_linux = "~/nix-config/home/zellij.nix"
+target_macos = "~/nix-config/home/zellij.nix"
 added_at = "2026-04-17T17:12:13"
 
 [[files]]
 source = "nix-config/home/neovim.nix"
 target_linux = "~/nix-config/home/neovim.nix"
+target_macos = "~/nix-config/home/neovim.nix"
 added_at = "2026-04-17T17:12:13"
 
 [[files]]
 source = "nix-config/home/lazygit.nix"
 target_linux = "~/nix-config/home/lazygit.nix"
+target_macos = "~/nix-config/home/lazygit.nix"
 added_at = "2026-04-17T17:12:13"
 
 [[files]]
 source = "nix-config/home/kanata.nix"
 target_linux = "~/nix-config/home/kanata.nix"
+target_macos = "~/nix-config/home/kanata.nix"
 added_at = "2026-04-17T17:12:13"
 
 [[files]]
 source = "nix-config/home/services.nix"
 target_linux = "~/nix-config/home/services.nix"
+target_macos = "~/nix-config/home/services.nix"
 added_at = "2026-04-17T17:12:13"
 
 [[files]]
 source = "nix-config/home/git.nix"
 target_linux = "~/nix-config/home/git.nix"
+target_macos = "~/nix-config/home/git.nix"
 added_at = "2026-04-17T17:12:13"
 
 [[files]]
 source = "nix-config/home/gtk.nix"
 target_linux = "~/nix-config/home/gtk.nix"
+target_macos = "~/nix-config/home/gtk.nix"
 added_at = "2026-04-17T17:12:13"
 
 [[files]]
 source = "nix-config/home/fonts.nix"
 target_linux = "~/nix-config/home/fonts.nix"
+target_macos = "~/nix-config/home/fonts.nix"
 added_at = "2026-04-17T17:12:13"
 
 [[files]]
 source = "nix-config/home/default.nix"
 target_linux = "~/nix-config/home/default.nix"
+target_macos = "~/nix-config/home/default.nix"
 added_at = "2026-04-17T17:12:13"
 
 [[files]]
 source = "nix-config/home/niri.nix"
 target_linux = "~/nix-config/home/niri.nix"
+target_macos = "~/nix-config/home/niri.nix"
 added_at = "2026-04-17T17:12:13"
 
 [[files]]
 source = "nix-config/home/niri-minimal.nix"
 target_linux = "~/nix-config/home/niri-minimal.nix"
+target_macos = "~/nix-config/home/niri-minimal.nix"
 added_at = "2026-04-17T17:12:13"
 
 [[files]]
 source = "nix-config/home/wsl.nix"
 target_linux = "~/nix-config/home/wsl.nix"
+target_macos = "~/nix-config/home/wsl.nix"
 added_at = "2026-04-17T17:12:13"
 
 [[files]]
 source = "nix-config/configs/nvim/.gitignore"
 target_linux = "~/nix-config/configs/nvim/.gitignore"
+target_macos = "~/nix-config/configs/nvim/.gitignore"
 added_at = "2026-04-17T17:12:13"
 
 [[files]]
 source = "nix-config/configs/nvim/.neoconf.json"
 target_linux = "~/nix-config/configs/nvim/.neoconf.json"
+target_macos = "~/nix-config/configs/nvim/.neoconf.json"
 added_at = "2026-04-17T17:12:13"
 
 [[files]]
 source = "nix-config/configs/nvim/LICENSE"
 target_linux = "~/nix-config/configs/nvim/LICENSE"
+target_macos = "~/nix-config/configs/nvim/LICENSE"
 added_at = "2026-04-17T17:12:13"
 
 [[files]]
 source = "nix-config/configs/nvim/README.md"
 target_linux = "~/nix-config/configs/nvim/README.md"
+target_macos = "~/nix-config/configs/nvim/README.md"
 added_at = "2026-04-17T17:12:13"
 
 [[files]]
 source = "nix-config/configs/nvim/after/ftplugin/cpp.lua"
 target_linux = "~/nix-config/configs/nvim/after/ftplugin/cpp.lua"
+target_macos = "~/nix-config/configs/nvim/after/ftplugin/cpp.lua"
 added_at = "2026-04-17T17:12:13"
 
 [[files]]
 source = "nix-config/configs/nvim/lua/config/lsp.lua"
 target_linux = "~/nix-config/configs/nvim/lua/config/lsp.lua"
+target_macos = "~/nix-config/configs/nvim/lua/config/lsp.lua"
 added_at = "2026-04-17T17:12:13"
 
 [[files]]
 source = "nix-config/configs/nvim/lua/plugins/typst.lua"
 target_linux = "~/nix-config/configs/nvim/lua/plugins/typst.lua"
+target_macos = "~/nix-config/configs/nvim/lua/plugins/typst.lua"
 added_at = "2026-04-17T17:12:13"
 
 [[files]]
 source = "nix-config/configs/nvim/stylua.toml"
 target_linux = "~/nix-config/configs/nvim/stylua.toml"
+target_macos = "~/nix-config/configs/nvim/stylua.toml"
 added_at = "2026-04-17T17:12:13"
 
 [[files]]
 source = "nix-config/configs/nvim/init.lua"
 target_linux = "~/nix-config/configs/nvim/init.lua"
+target_macos = "~/nix-config/configs/nvim/init.lua"
 added_at = "2026-04-17T17:12:13"
 
 [[files]]
 source = "nix-config/configs/kanata/kanata.kbd"
 target_linux = "~/nix-config/configs/kanata/kanata.kbd"
+target_macos = "~/nix-config/configs/kanata/kanata.kbd"
 added_at = "2026-04-17T17:12:13"
 
 [[files]]
 source = "nix-config/configs/zellij/config.kdl"
 target_linux = "~/nix-config/configs/zellij/config.kdl"
+target_macos = "~/nix-config/configs/zellij/config.kdl"
 added_at = "2026-04-17T17:12:13"
 
 [[files]]
 source = "nix-config/configs/ghostty/config"
 target_linux = "~/nix-config/configs/ghostty/config"
+target_macos = "~/nix-config/configs/ghostty/config"
 added_at = "2026-04-17T17:12:13"
 
 [[files]]
 source = "nix-config/configs/zed/settings.json"
 target_linux = "~/nix-config/configs/zed/settings.json"
+target_macos = "~/nix-config/configs/zed/settings.json"
 added_at = "2026-04-17T17:12:13"
 
 [[files]]
 source = "nix-config/configs/zed/keymap.json"
 target_linux = "~/nix-config/configs/zed/keymap.json"
+target_macos = "~/nix-config/configs/zed/keymap.json"
 added_at = "2026-04-17T17:12:13"
 
 [[files]]
 source = "nix-config/.gitignore"
 target_linux = "~/nix-config/.gitignore"
+target_macos = "~/nix-config/.gitignore"
 added_at = "2026-04-17T17:12:13"
 
 [[files]]
 source = "nix-config/flake.lock"
 target_linux = "~/nix-config/flake.lock"
+target_macos = "~/nix-config/flake.lock"
 added_at = "2026-04-17T17:12:13"
 
 [[files]]
 source = "nix-config/hosts/vm-niri/niri.nix"
 target_linux = "~/nix-config/hosts/vm-niri/niri.nix"
+target_macos = "~/nix-config/hosts/vm-niri/niri.nix"
 added_at = "2026-04-17T17:12:13"
 
 [[files]]
 source = "nix-config/hosts/vm-niri/hardware-configuration.nix"
 target_linux = "~/nix-config/hosts/vm-niri/hardware-configuration.nix"
+target_macos = "~/nix-config/hosts/vm-niri/hardware-configuration.nix"
 added_at = "2026-04-17T17:12:13"
 
 [[files]]
 source = "nix-config/hosts/vm-niri/configuration.nix"
 target_linux = "~/nix-config/hosts/vm-niri/configuration.nix"
+target_macos = "~/nix-config/hosts/vm-niri/configuration.nix"
 added_at = "2026-04-17T17:12:13"
 
 [[files]]
 source = "nix-config/hosts/usb-niri/niri.nix"
 target_linux = "~/nix-config/hosts/usb-niri/niri.nix"
+target_macos = "~/nix-config/hosts/usb-niri/niri.nix"
 added_at = "2026-04-17T17:12:13"
 
 [[files]]
 source = "nix-config/hosts/usb-niri/configuration.nix"
 target_linux = "~/nix-config/hosts/usb-niri/configuration.nix"
+target_macos = "~/nix-config/hosts/usb-niri/configuration.nix"
 added_at = "2026-04-17T17:12:13"
 
 [[files]]
 source = "nix-config/hosts/usb-niri/hardware-configuration.nix"
 target_linux = "~/nix-config/hosts/usb-niri/hardware-configuration.nix"
+target_macos = "~/nix-config/hosts/usb-niri/hardware-configuration.nix"
 added_at = "2026-04-17T17:12:13"
 
 [[files]]
 source = "nix-config/hosts/wsl/configuration.nix"
 target_linux = "~/nix-config/hosts/wsl/configuration.nix"
+target_macos = "~/nix-config/hosts/wsl/configuration.nix"
 added_at = "2026-04-17T17:12:13"
 
 [[files]]
 source = "nix-config/flake.nix"
 target_linux = "~/nix-config/flake.nix"
+target_macos = "~/nix-config/flake.nix"
 added_at = "2026-04-17T17:12:13"
 
 [[files]]
 source = ".config/starship.toml"
+target_linux = "~/.config/starship.toml"
+target_macos = "~/.config/starship.toml"
+target_windows = "~/AppData/Roaming/starship/starship.toml"
 added_at = "2026-05-18T17:17:40"
 
 [[ignores]]
