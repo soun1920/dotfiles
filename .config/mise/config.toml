@@ -1,5 +1,7 @@
 
 [tools]
+"cargo:basalt-tui" = "latest"
+"cargo:cargo-generate" = "latest"
 bat = "latest"
 chezmoi = "latest"
 cmake = "latest"

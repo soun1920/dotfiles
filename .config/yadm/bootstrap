@@ -45,6 +45,10 @@ if [[ -n "$FISH_PATH" ]] && [[ "$SHELL" != "$FISH_PATH" ]]; then
   chsh -s "$FISH_PATH"
 fi
 
+# cargo install (mise管理不可のもの)
+echo "==> Installing cargo packages..."
+cargo install --git https://github.com/rtk-ai/rtk
+
 # uv tools
 echo "==> Installing uv tools..."
 uv tool install atcoder-tools
