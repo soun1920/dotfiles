@@ -45,6 +45,16 @@ if [[ -n "$FISH_PATH" ]] && [[ "$SHELL" != "$FISH_PATH" ]]; then
   chsh -s "$FISH_PATH"
 fi
 
+# uv tools
+echo "==> Installing uv tools..."
+uv tool install atcoder-tools
+uv tool install wandbox-api
+uv tool install claude-conversation-extractor
+
+# pnpm global packages
+echo "==> Installing pnpm global packages..."
+pnpm install -g atcoder-cli
+
 # fisher + fish プラグイン
 if command -v fish &>/dev/null; then
   echo "==> Installing fisher and fish plugins..."
