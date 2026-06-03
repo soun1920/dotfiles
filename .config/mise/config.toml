@@ -2,6 +2,7 @@
 [tools]
 "cargo:basalt-tui" = "latest"
 "cargo:cargo-generate" = "latest"
+"cargo:kanata" = "latest"
 bat = "latest"
 chezmoi = "latest"
 cmake = "latest"

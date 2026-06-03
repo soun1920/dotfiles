@@ -5,7 +5,7 @@ echo "==> yadm bootstrap start"
 
 # パッケージインストール（mise管理のもの・GUIアプリは除く）
 PACKAGES_COMMON=(
-  kanata wl-clipboard git curl fish
+  wl-clipboard git curl fish
 )
 PACKAGES_FEDORA=(
   "${PACKAGES_COMMON[@]}"
