@@ -1,0 +1,13 @@
+{
+  "Competitive Programming Template": {
+    "prefix": "cpmain",
+    "body": [
+      "#include <bits/stdc++.h>",
+      "using namespace std;",
+      "int main() {",
+      "    $0",
+      "}"
+    ],
+    "description": "CP template"
+  }
+}
