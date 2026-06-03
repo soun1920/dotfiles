@@ -1,0 +1,38 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+echo "==> yadm bootstrap start"
+
+# mise
+if ! command -v mise &>/dev/null; then
+  echo "==> Installing mise..."
+  curl https://mise.run | sh
+  export PATH="$HOME/.local/bin:$PATH"
+fi
+
+echo "==> Installing mise tools..."
+mise install
+
+# fish をデフォルトシェルに設定
+FISH_PATH="$(which fish 2>/dev/null || echo "")"
+if [[ -n "$FISH_PATH" ]] && [[ "$SHELL" != "$FISH_PATH" ]]; then
+  echo "==> Setting fish as default shell..."
+  if ! grep -qF "$FISH_PATH" /etc/shells; then
+    echo "$FISH_PATH" | sudo tee -a /etc/shells
+  fi
+  chsh -s "$FISH_PATH"
+fi
+
+# fisher + fish プラグイン
+if command -v fish &>/dev/null; then
+  echo "==> Installing fisher and fish plugins..."
+  fish -c "
+    if not functions -q fisher
+      curl -sL https://raw.githubusercontent.com/jorgebucaran/fisher/main/functions/fisher.fish | source
+      fisher install jorgebucaran/fisher
+    end
+    fisher update
+  "
+fi
+
+echo "==> Bootstrap complete!"
