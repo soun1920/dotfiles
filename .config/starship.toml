@@ -12,12 +12,18 @@
 # gray:    #6b7089
 
 format = """
-[╭──](fg:#6b7089)[$directory](bold fg:#84a0c6)([ ─ ](fg:#6b7089)$git_branch $git_status)([ ─ ](fg:#6b7089)$python$nodejs$rust$golang$java$lua$docker_context$package)
+[╭──](fg:#6b7089)[$directory](bold fg:#84a0c6)($container)([ ─ ](fg:#6b7089)$git_branch $git_status)([ ─ ](fg:#6b7089)$python$nodejs$rust$golang$java$lua$docker_context$package)
 [╰─>](fg:#6b7089) """
 
 right_format = """$cmd_duration$time"""
 
 add_newline = true
+
+# コンテナ（distrobox など）
+[container]
+symbol = "󰏖 "
+style = "fg:#a093c7"
+format = "[ ─ ](fg:#6b7089)[$symbol$name]($style) "
 
 # ディレクトリ
 [directory]
