@@ -1,19 +1,28 @@
 
 [tools]
+bat = "latest"
 chezmoi = "latest"
+cmake = "latest"
 direnv = "latest"
+eza = "latest"
 fzf = "latest"
+gh = "latest"
 ghq = "latest"
 go = "latest"
+jq = "latest"
+lazygit = "latest"
 neovim = "latest"
 node = "latest"
 pnpm = "latest"
+ripgrep = "latest"
 rust = "latest"
 starship = "latest"
+tmux = "latest"
 uv = "latest"
 yadm = "latest"
 yazi = "latest"
 yt-dlp = "latest"
+zellij = "latest"
 zoxide = "latest"
 
 [settings]
