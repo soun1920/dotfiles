@@ -3,6 +3,31 @@ set -euo pipefail
 
 echo "==> yadm bootstrap start"
 
+# パッケージインストール（mise管理のもの・GUIアプリは除く）
+PACKAGES_COMMON=(
+  bat ripgrep jq gh lazygit tmux zellij
+  kanata wl-clipboard eza gcc make cmake
+  git curl fish
+)
+PACKAGES_FEDORA=(
+  "${PACKAGES_COMMON[@]}"
+  wl-clipboard
+)
+PACKAGES_UBUNTU=(
+  "${PACKAGES_COMMON[@]}"
+  wl-clipboard
+  build-essential  # gcc/make/cmake を含む
+)
+
+if command -v dnf &>/dev/null; then
+  echo "==> Installing packages via dnf..."
+  sudo dnf install -y "${PACKAGES_FEDORA[@]}"
+elif command -v apt &>/dev/null; then
+  echo "==> Installing packages via apt..."
+  sudo apt update
+  sudo apt install -y "${PACKAGES_UBUNTU[@]}"
+fi
+
 # mise
 if ! command -v mise &>/dev/null; then
   echo "==> Installing mise..."
