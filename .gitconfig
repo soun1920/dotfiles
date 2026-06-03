@@ -1,0 +1,20 @@
+[core]
+[user]
+	name = soun1920
+	email = soun29300@gmail.com
+
+[user]
+  signingkey = ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIAJ2rnT+2FqwL0Kvlc+mzYOcaH5jT5m0uMRxtYwp5pJn
+
+[gpg]
+  format = ssh
+
+
+[credential "https://github.com"]
+	helper = 
+	helper = !/usr/bin/gh auth git-credential
+[credential "https://gist.github.com"]
+	helper = 
+	helper = !/usr/bin/gh auth git-credential
+[push]
+	autoSetupRemote = true
