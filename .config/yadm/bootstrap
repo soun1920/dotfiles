@@ -5,18 +5,32 @@ echo "==> yadm bootstrap start"
 
 # パッケージインストール（mise管理のもの・GUIアプリは除く）
 PACKAGES_COMMON=(
-  wl-clipboard git curl fish
+  git curl fish
 )
 PACKAGES_FEDORA=(
   "${PACKAGES_COMMON[@]}"
-  gcc make
+  wl-clipboard gcc make
 )
 PACKAGES_UBUNTU=(
   "${PACKAGES_COMMON[@]}"
-  build-essential
+  wl-clipboard build-essential
+)
+PACKAGES_DARWIN=(
+  "${PACKAGES_COMMON[@]}"
 )
 
-if command -v dnf &>/dev/null; then
+if [[ "$(uname)" == "Darwin" ]]; then
+  if ! command -v brew &>/dev/null; then
+    echo "==> Installing Homebrew..."
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+    # Apple Silicon
+    if [[ -f /opt/homebrew/bin/brew ]]; then
+      eval "$(/opt/homebrew/bin/brew shellenv)"
+    fi
+  fi
+  echo "==> Installing packages via brew..."
+  brew install "${PACKAGES_DARWIN[@]}"
+elif command -v dnf &>/dev/null; then
   echo "==> Installing packages via dnf..."
   sudo dnf install -y "${PACKAGES_FEDORA[@]}"
 elif command -v apt &>/dev/null; then
