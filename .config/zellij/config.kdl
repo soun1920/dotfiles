@@ -275,18 +275,35 @@ load_plugins {
 web_client {
     font "monospace"
 }
+
+// Iceberg配色 (tmux.conf / wezterm.lua と統一)
+themes {
+    iceberg {
+        fg "#c6c8d1"
+        bg "#161821"
+        black "#1e2132"
+        red "#e27878"
+        green "#b4be82"
+        yellow "#e2a478"
+        blue "#84a0c6"
+        magenta "#a093c7"
+        cyan "#89b8c2"
+        white "#c6c8d1"
+        orange "#e2a478"
+    }
+}
  
 // Use a simplified UI without special fonts (arrow glyphs)
 // Options:
 //   - true
 //   - false (Default)
 // 
-// simplified_ui true
+simplified_ui true
  
 // Choose the theme that is specified in the themes section.
 // Default: default
 // 
-theme "tokyo-night-dark"
+theme "iceberg"
  
 // Choose the base input mode of zellij.
 // Default: normal
@@ -305,7 +322,7 @@ theme "tokyo-night-dark"
 // The name of the default layout to load on startup
 // Default: "default"
 // 
-// default_layout "compact"
+default_layout "compact"
  
 // The folder in which Zellij will look for layouts
 // (Requires restart)
@@ -331,7 +348,7 @@ theme "tokyo-night-dark"
 //   - true (default, enabled)
 //   - false
 // 
-// pane_frames false
+pane_frames false
  
 // When attaching to an existing session with other users,
 // should the session be mirrored (true)

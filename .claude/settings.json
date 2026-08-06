@@ -1,4 +1,5 @@
 {
+  "model": "sonnet",
   "hooks": {
     "PreToolUse": [
       {
@@ -19,7 +20,12 @@
   "enabledPlugins": {
     "frontend-design@claude-plugins-official": true,
     "rust-analyzer-lsp@claude-plugins-official": true,
-    "impeccable@impeccable": true
+    "impeccable@impeccable": true,
+    "clangd-lsp@claude-plugins-official": true,
+    "pyright-lsp@claude-plugins-official": true,
+    "lua-lsp@claude-plugins-official": true,
+    "codex@openai-codex": true,
+    "compact-plus@compact-plus": true
   },
   "extraKnownMarketplaces": {
     "impeccable": {
@@ -27,9 +33,22 @@
         "source": "github",
         "repo": "pbakaus/impeccable"
       }
+    },
+    "openai-codex": {
+      "source": {
+        "source": "github",
+        "repo": "openai/codex-plugin-cc"
+      }
+    },
+    "compact-plus": {
+      "source": {
+        "source": "github",
+        "repo": "u-ichi/compact-plus"
+      }
     }
   },
-  "effortLevel": "medium",
+  "effortLevel": "high",
+  "tui": "fullscreen",
   "theme": "dark-ansi",
   "agentPushNotifEnabled": true
 }

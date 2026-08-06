@@ -27,6 +27,13 @@ yazi = "latest"
 yt-dlp = "latest"
 zellij = "latest"
 zoxide = "latest"
+fd = "latest"
+usage = "latest"
+deno = "latest"
+protobuf = "latest"
+typst = "latest"
+tinymist = "latest"
 
 [settings]
 idiomatic_version_file_enable_tools = ["python"]
+experimental = true

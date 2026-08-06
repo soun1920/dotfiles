@@ -43,11 +43,11 @@ end
 config.colors = {
     foreground    = "#c6c8d1",
     background    = "#161821",
-    cursor_bg     = "#c6c8d1",
+    cursor_bg     = "#84a0c6",
     cursor_fg     = "#161821",
-    cursor_border = "#c6c8d1",
-    selection_fg  = "#161821",
-    selection_bg  = "#c6c8d1",
+    cursor_border = "#84a0c6",
+    selection_fg  = "#c6c8d1",
+    selection_bg  = "#2d3a54",
     ansi          = {
         "#1e2132", -- black
         "#e27878", -- red
@@ -71,20 +71,25 @@ config.colors = {
     tab_bar       = {
         background = "#161821",
         active_tab = {
-            bg_color = "#44716a",
+            bg_color = "#2d3a54",
             fg_color = "#c6c8d1",
+            intensity = "Bold",
         },
         inactive_tab = {
             bg_color = "#1e2132",
-            fg_color = "#6b7089",
+            fg_color = "#a7a9b3",
         },
         inactive_tab_hover = {
-            bg_color = "#2a2f45",
+            bg_color = "#272c42",
             fg_color = "#c6c8d1",
         },
         new_tab = {
             bg_color = "#161821",
             fg_color = "#6b7089",
+        },
+        new_tab_hover = {
+            bg_color = "#272c42",
+            fg_color = "#c6c8d1",
         },
     },
 }
@@ -102,6 +107,9 @@ config.default_cursor_style = "BlinkingBar"
 -- ─── Window ───────────────────────────────────────────────────────────────────
 config.window_padding = { left = 0, right = 0, top = 0, bottom = 0 }
 config.hide_tab_bar_if_only_one_tab = true
+config.use_fancy_tab_bar = false
+config.tab_bar_at_bottom = false
+config.tab_max_width = 28
 config.enable_scroll_bar = false
 config.adjust_window_size_when_changing_font_size = false
 config.automatically_reload_config = true

@@ -43,6 +43,7 @@ hi("IncSearch",       {fg=c.bg0,   bg=c.blue})
 hi("CurSearch",       {fg=c.bg0,   bg=c.blue})
 hi("MatchParen",      {fg=c.blue,  bg=c.bg5, bold=true})
 hi("WinSeparator",    {fg=c.bg0})
+hi("Directory",       {fg=c.cyan})
 hi("Folded",          {fg=c.fg2,   bg=c.bg5})
 hi("FoldColumn",      {fg=c.fg0,   bg=c.bg3})
 

@@ -85,4 +85,10 @@ if command -v fish &>/dev/null; then
   "
 fi
 
+# WakaTime API key を 1Password から生成 (存在すれば)
+if [[ -x "$HOME/bin/sync-wakatime-token.sh" ]]; then
+  echo "==> Syncing WakaTime token from 1Password..."
+  "$HOME/bin/sync-wakatime-token.sh" || true
+fi
+
 echo "==> Bootstrap complete!"

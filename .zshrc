@@ -45,16 +45,6 @@ else
 fi
 
 # ==============================================================================
-# ROS2
-# ==============================================================================
-if [ -f /opt/ros/jazzy/setup.zsh ]; then
-    source /opt/ros/jazzy/setup.zsh
-fi
-
-if [ -f /opt/ros/humble/setup.zsh ]; then
-    source /opt/ros/humble/setup.zsh
-fi
-
 # ==============================================================================
 # プラグイン
 # ==============================================================================
@@ -93,9 +83,24 @@ _cached_eval() {
 
 _cached_eval mise    /home/aw5qm/.local/bin/mise activate zsh
 
+# ROS2 (mise activate でキャッシュが PATH を上書きするため、必ず後に source する)
+# ==============================================================================
+if [ -f /opt/ros/jazzy/setup.zsh ]; then
+    source /opt/ros/jazzy/setup.zsh
+fi
+
+if [ -f /opt/ros/humble/setup.zsh ]; then
+    source /opt/ros/humble/setup.zsh
+fi
+
 # ROS2 補完 (mise activate で ~/.local/bin が PATH に入った後に登録)
 if [ -f /opt/ros/humble/setup.zsh ] && command -v register-python-argcomplete >/dev/null 2>&1; then
     eval "$(register-python-argcomplete --shell zsh ros2)"
+fi
+
+# colcon 補完
+if command -v colcon >/dev/null 2>&1 && command -v register-python-argcomplete >/dev/null 2>&1; then
+    eval "$(register-python-argcomplete --shell zsh colcon)"
 fi
 
 _cached_eval starship "$(command -v starship)"  init zsh

@@ -18,3 +18,9 @@
 	helper = !/usr/bin/gh auth git-credential
 [push]
 	autoSetupRemote = true
+[init]
+	defaultBranch = main
+[ghq]
+	user = soun1920
+[credential]
+	helper = "!f() { /home/aw5qm/.vscode-server/bin/6928394f91b684055b873eecb8bc281365131f1c/node /tmp/vscode-remote-containers-93bdb9d2-0001-401b-9aca-cb34806cc0fb.js git-credential-helper $*; }; f"
