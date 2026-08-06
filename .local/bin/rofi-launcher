@@ -6,6 +6,9 @@ exec rofi \
     -show combi \
     -modes combi \
     -combi-modes "drun,palette:${HOME}/.local/bin/rofi-palette" \
+    -display-combi "Run" \
+    -display-drun "" \
+    -display-palette "" \
     -show-icons \
     -matching fuzzy \
     -sort \
