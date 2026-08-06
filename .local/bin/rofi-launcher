@@ -5,7 +5,7 @@ set -u
 exec rofi \
     -show combi \
     -modes combi \
-    -combi-modes "drun,palette:${HOME}/.local/bin/rofi-palette" \
+    -combi-modes "palette:${HOME}/.local/bin/rofi-palette,drun" \
     -display-combi "Run" \
     -display-drun "" \
     -display-palette "" \
