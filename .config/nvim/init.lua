@@ -18,7 +18,7 @@ vim.g.maplocalleader = " "
 
 require("config.options")
 require("config.keymaps")
-require("config.common")   -- VSCode・ターミナル共通プラグイン
+require("config.common") -- VSCode・ターミナル共通プラグイン
 
 -- VSCode モードはここで終了
 if vim.g.vscode ~= nil then
