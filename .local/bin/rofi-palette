@@ -4,92 +4,135 @@ set -u
 
 readonly SEP=$'\x1f'
 
-open_web_search() {
-    local query=$1 encoded
-    encoded=$(jq -rn --arg query "$query" '$query | @uri')
-    setsid -f xdg-open "https://www.google.com/search?q=${encoded}" >/dev/null 2>&1
+header() {
+    printf '\0prompt%s%s\n' "$SEP" "$1"
+    printf '\0data%s%s\n' "$SEP" "$2"
 }
 
-open_bookmark() {
-    local initial=${1:-} bookmarks_file selection url
+open_web_search() {
+    local query=$1 encoded
+    [[ -n $query ]] || return
+    encoded=$(jq -rn --arg query "$query" '$query | @uri')
+    coproc (xdg-open "https://www.google.com/search?q=${encoded}" >/dev/null 2>&1)
+}
+
+open_claude_chat() {
+    local query=$1 encoded
+    [[ -n $query ]] || return
+    encoded=$(jq -rn --arg query "$query" '$query | @uri')
+    coproc (xdg-open "https://claude.com/new?q=${encoded}" >/dev/null 2>&1)
+}
+
+print_web() {
+    header "Google" "web"
+    printf '検索語を入力してEnter\0nonselectable%strue%spermanent%strue\n' "$SEP" "$SEP" "$SEP"
+}
+
+print_claude() {
+    header "Claude" "claude"
+    printf 'Claudeへのメッセージを入力してEnter\0nonselectable%strue%spermanent%strue\n' "$SEP" "$SEP" "$SEP"
+}
+
+print_bookmarks() {
+    local initial=${1:-} bookmarks_file name url
     local -a bookmark_files=()
 
+    header "Bookmark" "bookmark"
     while IFS= read -r bookmarks_file; do
         bookmark_files+=("$bookmarks_file")
     done < <(find "${HOME}/.config" -type f -name Bookmarks -path '*/Default/*' 2>/dev/null)
 
-    if ((${#bookmark_files[@]} == 0)); then
-        notify-send "Rofi" "Chromium系ブラウザのブックマークが見つかりません"
+    ((${#bookmark_files[@]})) || {
+        printf 'ブックマークが見つかりません\0nonselectable%strue\n' "$SEP"
         return
-    fi
+    }
 
-    selection=$(
-        jq -r '
-            .. | objects
-            | select(.type? == "url")
-            | [.name, .url]
-            | @tsv
-        ' "${bookmark_files[@]}" 2>/dev/null \
-            | sort -u \
-            | rofi -dmenu -i -matching fuzzy -filter "$initial" -p "Bookmark"
-    ) || return
-
-    url=${selection#*$'\t'}
-    [[ -n $url ]] && setsid -f xdg-open "$url" >/dev/null 2>&1
+    while IFS=$'\t' read -r name url; do
+        [[ -n $initial && ${name,,} != *${initial,,}* && ${url,,} != *${initial,,}* ]] && continue
+        printf '%s\0icon%sbookmark-new%smeta%s%s%sinfo%sbookmark:%s\n' \
+            "$name" "$SEP" "$SEP" "$SEP" "$url" "$SEP" "$SEP" "$url"
+    done < <(jq -r '.. | objects | select(.type? == "url") | [.name, .url] | @tsv' "${bookmark_files[@]}" 2>/dev/null | sort -u)
 }
 
-focus_window() {
-    local initial=${1:-} selection id
-    selection=$(
-        niri msg --json windows \
-            | jq -r '.[] | [(.title // "(untitled)"), .app_id, (.workspace_id | tostring), (.id | tostring)] | @tsv' \
-            | rofi -dmenu -i -matching fuzzy -filter "$initial" -p "Window"
-    ) || return
+print_windows() {
+    local initial=${1:-} title app workspace id
+    header "Window" "window"
 
-    id=${selection##*$'\t'}
-    [[ $id =~ ^[0-9]+$ ]] && niri msg action focus-window --id "$id" >/dev/null
+    while IFS=$'\t' read -r title app workspace id; do
+        [[ -n $initial && ${title,,} != *${initial,,}* && ${app,,} != *${initial,,}* ]] && continue
+        printf '%s\0icon%s%s%smeta%s%s workspace %s%sinfo%swindow:%s\n' \
+            "$title" "$SEP" "$app" "$SEP" "$SEP" "$app" "$workspace" "$SEP" "$SEP" "$id"
+    done < <(niri msg --json windows | jq -r '.[] | [(.title // "(untitled)"), .app_id, (.workspace_id | tostring), (.id | tostring)] | @tsv')
 }
 
-open_clipboard() {
-    local initial=${1:-} selection
+print_clipboard() {
+    local initial=${1:-} entry id preview
+    header "Clipboard" "clipboard"
 
-    if command -v cliphist >/dev/null 2>&1; then
-        selection=$(cliphist list | rofi -dmenu -i -matching fuzzy -filter "$initial" -p "Clipboard") || return
-        [[ -n $selection ]] && cliphist decode <<<"$selection" | wl-copy
-    else
-        dms ipc call clipboard toggle >/dev/null 2>&1
-        notify-send "Rofi" "cliphist未導入のためDMS Clipboardを開きました"
-    fi
+    while IFS= read -r entry; do
+        id=${entry%%$'\t'*}
+        preview=${entry#*$'\t'}
+        [[ -n $initial && ${preview,,} != *${initial,,}* ]] && continue
+        printf '%s\0icon%sedit-paste%sinfo%sclipboard:%s\n' \
+            "$preview" "$SEP" "$SEP" "$SEP" "$id"
+    done < <(cliphist list)
 }
 
-run_command() {
+print_root() {
+    printf 'web  Google検索\0icon%sweb-browser%sinfo%scmd:web\n' "$SEP" "$SEP" "$SEP"
+    printf 'cl   Claudeチャット\0icon%sweb-browser%sinfo%scmd:claude\n' "$SEP" "$SEP" "$SEP"
+    printf 'win  ウィンドウ切り替え\0icon%sfocus-windows%sinfo%scmd:win\n' "$SEP" "$SEP" "$SEP"
+    printf 'bm   ブックマーク\0icon%sbookmark-new%sinfo%scmd:bookmark\n' "$SEP" "$SEP" "$SEP"
+    printf 'clip クリップボード\0icon%sedit-paste%sinfo%scmd:clipboard\n' "$SEP" "$SEP" "$SEP"
+    printf 'pw   1Password Quick Access\0icon%s1password%sinfo%scmd:password\n' "$SEP" "$SEP" "$SEP"
+}
+
+handle_custom() {
     local input=$1
-
     case "$input" in
-        web\ *) open_web_search "${input#web }" ;;
-        web)    open_web_search "$(rofi -dmenu -p 'Google')" ;;
-        win\ *) focus_window "${input#win }" ;;
-        win)    focus_window ;;
-        bm\ *)  open_bookmark "${input#bm }" ;;
-        bm)     open_bookmark ;;
-        clip\ *) open_clipboard "${input#clip }" ;;
-        clip)    open_clipboard ;;
-        pw\ *|pw) setsid -f 1password --quick-access >/dev/null 2>&1 ;;
+        web\ *)  open_web_search "${input#web }" ;;
+        web)     print_web ;;
+        cl\ *)   open_claude_chat "${input#cl }" ;;
+        cl)      print_claude ;;
+        win\ *)  print_windows "${input#win }" ;;
+        win)     print_windows ;;
+        bm\ *)   print_bookmarks "${input#bm }" ;;
+        bm)      print_bookmarks ;;
+        clip\ *) print_clipboard "${input#clip }" ;;
+        clip)    print_clipboard ;;
+        pw\ *|pw) coproc (1password --quick-access >/dev/null 2>&1) ;;
     esac
 }
 
 case "${ROFI_RETV:-0}" in
     0)
-        printf 'web  Google検索\0icon%sweb-browser%sinfo%scmd:web\n' "$SEP" "$SEP" "$SEP"
-        printf 'win  ウィンドウ切り替え\0icon%sfocus-windows%sinfo%scmd:win\n' "$SEP" "$SEP" "$SEP"
-        printf 'bm   ブックマーク\0icon%sbookmark-new%sinfo%scmd:bm\n' "$SEP" "$SEP" "$SEP"
-        printf 'clip クリップボード\0icon%sedit-paste%sinfo%scmd:clip\n' "$SEP" "$SEP" "$SEP"
-        printf 'pw   1Password Quick Access\0icon%s1password%sinfo%scmd:pw\n' "$SEP" "$SEP" "$SEP"
+        print_root
         ;;
     1)
         case "${ROFI_INFO:-}" in
-            cmd:*) run_command "${ROFI_INFO#cmd:}" ;;
-            *)     run_command "${1:-}" ;;
+            cmd:web)       print_web ;;
+            cmd:claude)    print_claude ;;
+            cmd:win)       print_windows ;;
+            cmd:bookmark)  print_bookmarks ;;
+            cmd:clipboard) print_clipboard ;;
+            cmd:password)  coproc (1password --quick-access >/dev/null 2>&1) ;;
+            window:*)      niri msg action focus-window --id "${ROFI_INFO#window:}" >/dev/null ;;
+            bookmark:*)    coproc (xdg-open "${ROFI_INFO#bookmark:}" >/dev/null 2>&1) ;;
+            clipboard:*)   cliphist decode "${ROFI_INFO#clipboard:}" | wl-copy ;;
+            *)
+                case "${ROFI_DATA:-}" in
+                    web)    open_web_search "${1:-}" ;;
+                    claude) open_claude_chat "${1:-}" ;;
+                    *)   handle_custom "${1:-}" ;;
+                esac
+                ;;
+        esac
+        ;;
+    2)
+        case "${ROFI_DATA:-}" in
+            web)    open_web_search "${1:-}" ;;
+            claude) open_claude_chat "${1:-}" ;;
+            *)   handle_custom "${1:-}" ;;
         esac
         ;;
 esac
