@@ -26,6 +26,8 @@ starship init fish | source
 direnv hook fish | source
 uv generate-shell-completion fish | source
 
+alias nvim "NVIM_APPNAME=nvim-next command nvim"
+
 # ==============================================================================
 # カラー設定
 # ==============================================================================
@@ -51,10 +53,10 @@ alias clip "win32yank.exe"
 # alias ssh-add "ssh-add.exe"
 
 # ディレクトリ移動
-alias cdp 'cd "/mnt/c/Users/aw5qm/OneDrive - Kogakuin University/個人用"'
-alias cdc "cd /home/aw5qm/.config"
-alias cda 'cd "/mnt/c/Users/aw5qm/OneDrive - Kogakuin University/個人用/atcoder/"'
-
+# alias cdp 'cd "/mnt/c/Users/aw5qm/OneDrive - Kogakuin University/個人用"'
+# alias cdc "cd /home/aw5qm/.config"
+# alias cda 'cd "/mnt/c/Users/aw5qm/OneDrive - Kogakuin University/個人用/atcoder/"'
+#
 # Python仮想環境
 alias actv "source .venv/bin/activate.fish"
 alias activate "source .venv/bin/activate.fish"
@@ -133,7 +135,7 @@ function cpp_test
 
     return $exit_code
 end
-function cdg
+function dc
   cd "$(ghq list -p | fzf)"
 end
 function gg -d "Search and clone GitHub repositories using ghq"
