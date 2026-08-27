@@ -130,6 +130,7 @@ alias clip="win32yank.exe"
 alias ssh='ssh.exe'
 alias ssh-add='ssh-add.exe'
 
+alias nvim="NVIM_APPNAME=nvim-next nvim"
 alias cdp='cd "/mnt/c/Users/aw5qm/OneDrive - Kogakuin University/個人用"'
 alias cdc="cd /home/aw5qm/.config"
 alias cda='cd "/mnt/c/Users/aw5qm/OneDrive - Kogakuin University/個人用/atcoder/"'
@@ -146,6 +147,23 @@ alias rs2="source ../"
 # ==============================================================================
 # 関数
 # ==============================================================================
+gcd() {
+    if ! command -v ghq >/dev/null 2>&1 || ! command -v fzf >/dev/null 2>&1; then
+        echo "gcd: ghq と fzf が必要です" >&2
+        return 1
+    fi
+
+    local repo
+    repo=$(ghq list --full-path | fzf \
+        --prompt='repository> ' \
+        --height=40% \
+        --reverse \
+        --with-shell='zsh -c' \
+        --preview='ls -la --color=always {} 2>/dev/null') || return
+
+    [[ -n "$repo" ]] && builtin cd -- "$repo"
+}
+
 copy_to_clipboard() {
     if command -v pbcopy >/dev/null 2>&1; then
         pbcopy
