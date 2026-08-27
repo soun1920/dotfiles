@@ -10,6 +10,9 @@ later(function()
     add({ source = "ziglang/zig.vim" })
     add({ source = "ErickKramer/nvim-ros2" })
     add({ source = "chomosuke/typst-preview.nvim" })
+    add({ source = "windwp/nvim-ts-autotag" })
+
+    require("nvim-ts-autotag").setup()
 
     require("typst-preview").setup({
         dependencies_bin = { ["tinymist"] = "tinymist" },

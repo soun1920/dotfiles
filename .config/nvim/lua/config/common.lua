@@ -14,13 +14,7 @@ later(function()
         hooks = { post_checkout = function() vim.cmd("TSUpdate") end },
     })
     add({ source = "nvim-treesitter/nvim-treesitter-textobjects" })
-    local ok, configs = pcall(require, "nvim-treesitter.configs")
-    if not ok then return end
-    configs.setup({
-        ensure_installed = { "python", "lua", "javascript", "typescript", "tsx", "cpp", "c" },
-        highlight        = { enable = false },
-        indent           = { enable = false },
-    })
+    require("nvim-treesitter").install({ "python", "lua", "javascript", "typescript", "tsx", "cpp", "c", "html", "css" })
 end)
 
 later(function()

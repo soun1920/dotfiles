@@ -7,3 +7,7 @@ map("i", ";;", "<C-o>A;")
 map("n", "<Esc>", "<cmd>nohlsearch<CR>", { silent = true })
 map("n", "<leader>[", "<C-w>h", { desc = "左のウィンドウへ" })
 map("n", "<leader>]", "<C-w>l", { desc = "右のウィンドウへ" })
+
+vim.api.nvim_create_user_command("Config", function()
+    vim.cmd("tabnew " .. vim.fn.stdpath("config"))
+end, { desc = "Open Neovim config directory" })

@@ -13,6 +13,7 @@ require("mason").setup({
     ensure_installed = {
         -- LSP servers
         "rust-analyzer", "gopls", "ruff", "typescript-language-server", "clangd", "lua-language-server", "deno",
+        "veryl-ls", "html-lsp", "css-lsp", "emmet-language-server",
         -- Formatters
         "rustfmt", "gofumpt", "prettier", "clang-format", "stylua",
         -- Linters
@@ -244,7 +245,7 @@ vim.lsp.config('clangd', {
         "--function-arg-placeholders",
         "--fallback-style=llvm",
     },
-    filetypes = { 'c', 'cpp', 'objc', 'objcpp', 'cuda', 'proto' },
+    filetypes = { 'c', 'cpp', 'objc', 'objcpp', 'cuda' },
     root_markers = { '.clangd', '.clang-tidy', '.clang-format', 'compile_commands.json', 'compile_flags.txt', 'configure.ac', '.git' },
     on_attach = on_attach_clangd,
     capabilities = capabilities,
@@ -253,6 +254,15 @@ vim.lsp.config('clangd', {
         completeUnimported = true,
         clangdFileStatus = true,
     },
+})
+
+-- Protobuf
+vim.lsp.config('buf_ls', {
+    cmd = { 'buf', 'lsp', 'serve' },
+    filetypes = { 'proto' },
+    root_markers = { 'buf.yaml', 'buf.work.yaml', '.git' },
+    on_attach = on_attach,
+    capabilities = capabilities,
 })
 
 -- Lua
@@ -300,8 +310,53 @@ vim.lsp.config('tinymist', {
     },
 })
 
+add({ source = "veryl-lang/veryl.vim" })
+
+vim.lsp.config('veryl_ls', {
+    on_attach = on_attach,
+    capabilities = capabilities,
+})
+
+-- HTML
+vim.lsp.config('html', {
+    cmd = { 'vscode-html-language-server', '--stdio' },
+    filetypes = { 'html' },
+    root_markers = { 'package.json', '.git' },
+    on_attach = on_attach,
+    capabilities = capabilities,
+    init_options = {
+        provideFormatter = false, -- フォーマットは conform.nvim (prettier) に任せる
+    },
+})
+
+-- CSS/SCSS/LESS
+vim.lsp.config('cssls', {
+    cmd = { 'vscode-css-language-server', '--stdio' },
+    filetypes = { 'css', 'scss', 'less' },
+    root_markers = { 'package.json', '.git' },
+    on_attach = on_attach,
+    capabilities = capabilities,
+    settings = {
+        css = { validate = true },
+        scss = { validate = true },
+        less = { validate = true },
+    },
+})
+
+-- Emmet（HTML/CSS/JSXでの高速マークアップ補完）
+vim.lsp.config('emmet_ls', {
+    cmd = { 'emmet-language-server', '--stdio' },
+    filetypes = { 'html', 'css', 'scss', 'less', 'javascriptreact', 'typescriptreact' },
+    root_markers = { '.git' },
+    on_attach = on_attach,
+    capabilities = capabilities,
+})
+
 -- Enable LSP servers (required in Neovim 0.11+)
-vim.lsp.enable({ 'rust_analyzer', 'gopls', 'ruff', 'ty', 'ts_ls', 'clangd', 'lua_ls', 'tinymist' })
+vim.lsp.enable({
+    'rust_analyzer', 'gopls', 'ruff', 'ty', 'ts_ls', 'clangd', 'lua_ls', 'tinymist', 'veryl_ls',
+    'html', 'cssls', 'emmet_ls', 'buf_ls',
+})
 
 local function apply_hl()
     vim.api.nvim_set_hl(0, "LspInlayHint", { fg = "#7d8199", bg = "NONE", italic = true })
@@ -340,6 +395,9 @@ local luasnip = require('luasnip')
 require('luasnip.loaders.from_lua').load({ paths = vim.fn.stdpath('config') .. '/lua/snippets' })
 
 cmp.setup({
+    performance = {
+        max_view_entries = 10,
+    },
     window = {
         completion    = cmp.config.window.bordered(),
         documentation = cmp.config.window.bordered(),

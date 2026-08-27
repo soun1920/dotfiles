@@ -68,10 +68,12 @@ now(function()
             sidebar_win = nil
             return
         end
+        local dir = vim.fn.expand("%:p:h")
+        if dir == "" then dir = vim.fn.getcwd() end
         vim.cmd("topleft vsplit")
         sidebar_win = vim.api.nvim_get_current_win()
         vim.api.nvim_win_set_width(sidebar_win, 35)
-        require("oil").open(vim.fn.getcwd())
+        require("oil").open(dir)
         vim.wo.number = false
         vim.wo.relativenumber = false
         vim.wo.signcolumn = "no"

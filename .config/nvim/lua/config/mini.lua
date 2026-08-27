@@ -7,22 +7,27 @@ now(function()
 
     add({ source = "catppuccin/nvim", name = "catppuccin" })
     add({ source = "folke/tokyonight.nvim" })
-    add({ source = "cocopon/iceberg.vim" })
+    -- add({ source = "cocopon/iceberg.vim" })
+    add({ source = "oahlen/iceberg.nvim" })
     add({ source = "zaldih/themery.nvim" })
+    add({ source = "rebelot/kanagawa.nvim" })
+    add({ source = "AlexvZyl/nordic.nvim" })
 
     require("themery").setup({
         themes = {
-            { name = "Catppuccin",         colorscheme = "catppuccin" },
-            { name = "Tokyo Night Light",  colorscheme = "tokyonight-day" },
-            { name = "Iceberg",            colorscheme = "iceberg" },
-            { name = "Sigewinne Hydro",    colorscheme = "sigewinne-hydro" },
+            { name = "Catppuccin",        colorscheme = "catppuccin" },
+            { name = "Tokyo Night Light", colorscheme = "tokyonight-day" },
+            { name = "Iceberg",           colorscheme = "iceberg" },
+            { name = "Sigewinne Hydro",   colorscheme = "sigewinne-hydro" },
+            { name = "kanagawa",          colorscheme = "kanagawa" },
+            { name = "nordic",            colorscheme = "nordic" }
         },
         livePreview = true,
     })
 
     vim.keymap.set("n", "<leader>th", "<cmd>Themery<CR>", { desc = "Switch theme (Themery)" })
 
-    vim.cmd("colorscheme sigewinne-hydro")
+    vim.cmd("colorscheme iceberg")
 end)
 
 now(function()
@@ -45,8 +50,8 @@ now(function()
             },
             starter.sections.recent_files(5, false),
             starter.sections.recent_files(5, true),
-            { name = "New file", action = "enew",  section = "Actions" },
-            { name = "Quit",     action = "qall",  section = "Actions" },
+            { name = "New file", action = "enew", section = "Actions" },
+            { name = "Quit",     action = "qall", section = "Actions" },
         },
         content_hooks = {
             starter.gen_hook.adding_bullet(),
