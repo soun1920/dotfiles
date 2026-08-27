@@ -5,7 +5,6 @@
 "cargo:kanata" = "latest"
 bat = "latest"
 chezmoi = "latest"
-cmake = "latest"
 direnv = "latest"
 eza = "latest"
 fzf = "latest"
@@ -33,6 +32,7 @@ deno = "latest"
 protobuf = "latest"
 typst = "latest"
 tinymist = "latest"
+buf = "latest"
 
 [settings]
 idiomatic_version_file_enable_tools = ["python"]
