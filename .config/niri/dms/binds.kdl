@@ -6,11 +6,8 @@ binds {
 
     // === Application Launchers ===
     Mod+T hotkey-overlay-title="Open Terminal" { spawn "ghostty"; }
-    Mod+Space hotkey-overlay-title="Application Launcher" {
-        spawn "dms" "ipc" "call" "spotlight" "toggle";
-    }
-    Alt+Space hotkey-overlay-title="Rofi Command Palette" {
-        spawn "/home/aw5qm/.local/bin/rofi-launcher";
+    Alt+Space hotkey-overlay-title="Walker" {
+        spawn "walker";
     }
     Mod+V hotkey-overlay-title="Clipboard Manager" {
         spawn "dms" "ipc" "call" "clipboard" "toggle";
@@ -218,6 +215,20 @@ binds {
     Print { screenshot; }
     Ctrl+Print { screenshot-screen; }
     Alt+Print { screenshot-window; }
+    // === Screen Recording ===
+    Mod+Print hotkey-overlay-title="Start Screenrecording" {
+        spawn "sh" "-c" r#"
+            mkdir -p "$HOME/videos/screencapture"
+            file="$HOME/videos/screencapture/screenrec-$(date +%s).mp4"
+            notify-send -t 2000 -a "Screen Recording" "Screenrecord starting..."
+            wf-recorder -g "$(slurp -b '#00000090')" -f "$file"
+            wl-copy -t text/uri-list "file://$file"
+        "#;
+    }
+    Mod+Shift+Print hotkey-overlay-title="Stop Screenrecording" {
+        spawn "sh" "-c" "killall -s SIGINT wf-recorder && notify-send -t 2000 -a 'Screen Recording' 'Screenrecord stopped'";
+    }
+
     // === Display Profiles ===
     Mod+P hotkey-overlay-title="Cycle Display Profile" {
         spawn "dms" "ipc" "outputs" "cycleProfile";
