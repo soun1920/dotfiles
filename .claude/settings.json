@@ -25,7 +25,8 @@
     "pyright-lsp@claude-plugins-official": true,
     "lua-lsp@claude-plugins-official": true,
     "codex@openai-codex": true,
-    "compact-plus@compact-plus": true
+    "compact-plus@compact-plus": true,
+    "typescript-lsp@claude-plugins-official": true
   },
   "extraKnownMarketplaces": {
     "impeccable": {
@@ -50,5 +51,32 @@
   "effortLevel": "high",
   "tui": "fullscreen",
   "theme": "dark-ansi",
-  "agentPushNotifEnabled": true
+  "agentPushNotifEnabled": true,
+  "autoMode": {
+    "environment": [
+      "### Org-wide",
+      "**Organization**: None configured",
+      "**Cloud provider(s)**: None configured",
+      "**Repository visibility**: assume private unless the remote host and repo name indicate otherwise, or a visibility check in the transcript shows public",
+      "**Internal sharing / snippet hosting**: None configured — treat public paste/gist services as outside the trust boundary",
+      "**Secrets management**: None configured",
+      "**Default / protected branches**: unknown — no git remotes configured for this repo, and gh visibility/branch-protection check was not queryable (no origin remote)",
+      "**CI/CD deploy targets**: None configured",
+      "**Network posture**: None configured",
+      "**Source control**: The trusted repo only — no remotes are configured for /home/aw5qm/sandbox/ros2/rosbridge-test, so there is no remote to scope pushes to",
+      "**Trusted internal domains**: None configured",
+      "**Trusted cloud buckets**: None configured",
+      "**Key internal services**: None configured",
+      "**Internal package registry**: None configured",
+      "**Sensitive data locations & audiences**: any file or store holding personal data, confidential business data, credentials, regulated data, or similarly sensitive material; preserve exact handles when known and share only with audiences cleared at the [named+specifics] bar",
+      "**Data retention / declassification**: None configured",
+      "**Sensitive remote targets**: any namespace, host, or container whose name carries `prod` or `production` as a whole word or name segment (hyphen/underscore/dot-delimited — e.g. matches `prod-db`, not `producer`)",
+      "**Protected deployment namespaces / environments**: None configured — fall back to the Sensitive remote targets heuristic",
+      "**Protected IaC scopes**: IAM, RBAC, networking, quota, and node-pool resources; anything whose name or tag carries `prod` or `production` as a whole word or name segment",
+      "### User-specific",
+      "**Primary use of Claude Code**: software development (ROS2 / robotics work, based on repo name and ros2/colcon/rosbridge tool usage)",
+      "**Trusted repo**: /home/aw5qm/sandbox/ros2/rosbridge-test (the git repository the agent started in) — it has no configured remotes, so it is a local-only working copy; visibility is unknown/unconfirmed and there is no remote to push to",
+      "**Org-specific CLIs**: None configured"
+    ]
+  }
 }
