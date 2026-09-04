@@ -21,3 +21,15 @@ gui:
       - '#C6C8D1'
     searchingActiveBorderColor:
       - '#E2A478'
+
+customCommands:
+  - key: '<c-a>'
+    context: 'files'
+    description: 'Generate commit summary with Codex'
+    prompts:
+      - type: 'input'
+        title: 'AI-generated commit summary'
+        key: 'Message'
+        initialValue: '{{ runCommand "/home/aw5qm/.local/bin/lazygit-ai-commit" }}'
+    command: 'git commit --message {{.Form.Message | quote}}'
+    loadingText: 'Creating commit...'

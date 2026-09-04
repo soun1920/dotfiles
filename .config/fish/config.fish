@@ -61,6 +61,9 @@ alias clip "win32yank.exe"
 alias actv "source .venv/bin/activate.fish"
 alias activate "source .venv/bin/activate.fish"
 
+# yadm
+alias lazyyadm "lazygit --git-dir ~/.local/share/yadm/repo.git --work-tree ~"
+
 # C++コンパイル
 alias gc "g++ -std=gnu++20 -O2 -Wall -Wextra"
 alias cpp "g++ -std=gnu++20 -O2 -Wall -Wextra main.cpp"
@@ -156,3 +159,7 @@ if not string match -q -- $PNPM_HOME $PATH
   set -gx PATH "$PNPM_HOME" $PATH
 end
 # pnpm end
+
+
+# Added by Antigravity CLI installer
+set -gx PATH "/home/aw5qm/.local/bin" $PATH

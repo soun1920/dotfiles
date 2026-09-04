@@ -7,6 +7,10 @@
 // custom settings, run `zed: open default settings` from the
 // command palette (cmd-shift-p / ctrl-shift-p)
 {
+  "terminal": {
+    "font_size": 12.0
+  },
+  "reduce_motion": "on",
   "cli_default_open_behavior": "existing_window",
   "project_panel": {
     "dock": "left"
@@ -46,12 +50,15 @@
     }
   },
   "agent": {
+    "sandbox_permissions": {
+      "allow_unsandboxed": true
+    },
     "dock": "right",
     "default_model": {
       "effort": "high",
-      "provider": "copilot_chat",
-      "model": "gpt-5.3-codex",
-      "enable_thinking": false
+      "provider": "openai-subscribed",
+      "model": "gpt-5.6-sol",
+      "enable_thinking": true
     },
     "favorite_models": [],
     "model_parameters": []
@@ -117,7 +124,7 @@
   "buffer_font_family": "PlemolJP Console NF",
   "show_edit_predictions": true,
   "icon_theme": {
-    "mode": "dark",
+    "mode": "light",
     "light": "Catppuccin Macchiato",
     "dark": "Catppuccin Macchiato"
   },
@@ -126,8 +133,8 @@
   "buffer_font_size": 15,
   "theme": {
     "mode": "dark",
-    "light": "Everforest Light Hard (regular)",
-    "dark": "Catppuccin Macchiato",
+    "light": "Catppuccin Latte - No Italics",
+    "dark": "Ayu Mirage",
   },
   "inlay_hints": {
     "enabled": true,
@@ -136,5 +143,7 @@
     "show_other_hints": true,
     "edit_debounce_ms": 700,
     "scroll_debounce_ms": 50,
-  },
+  },  "experimental.theme_overrides": {
+
+  }
 }

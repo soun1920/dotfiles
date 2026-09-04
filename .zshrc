@@ -249,3 +249,7 @@ function setros() {
 # zoxide
 # ==============================================================================
 eval "$(zoxide init zsh)"
+
+
+# Added by Antigravity CLI installer
+export PATH="/home/aw5qm/.local/bin:$PATH"
