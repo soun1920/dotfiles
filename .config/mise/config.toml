@@ -34,6 +34,7 @@ typst = "latest"
 tinymist = "latest"
 buf = "latest"
 zig = "latest"
+java = "21"
 
 [settings]
 idiomatic_version_file_enable_tools = ["python"]

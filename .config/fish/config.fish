@@ -26,8 +26,6 @@ starship init fish | source
 direnv hook fish | source
 uv generate-shell-completion fish | source
 
-alias nvim "NVIM_APPNAME=nvim-next command nvim"
-
 # ==============================================================================
 # カラー設定
 # ==============================================================================

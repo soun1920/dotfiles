@@ -1,7 +1,10 @@
+-- nvim-next: 試用コンフィグ（NVIM_APPNAME=nvim-next で起動）
+-- データは ~/.local/share/nvim-next / ~/.local/state/nvim-next に完全分離される
+
 -- mini.deps bootstrap
 local path_package = vim.fn.stdpath('data') .. '/site/'
 local mini_path = path_package .. 'pack/deps/start/mini.nvim'
-if not vim.loop.fs_stat(mini_path) then
+if not vim.uv.fs_stat(mini_path) then
     vim.cmd('echo "Installing `mini.nvim`" | redraw')
     vim.fn.system({
         'git', 'clone', '--filter=blob:none',
@@ -35,3 +38,16 @@ require("config.lang")
 MiniDeps.later(function() require("config.lsp") end)
 MiniDeps.later(function() require("config.conform") end)
 MiniDeps.later(function() require("config.telescope") end)
+
+-- 遅延ロードの後始末
+-- `nvim file.rs` のように引数付きで起動すると、FileType は mini.deps の later()
+-- が走る前に発火し終えている。そのため treesitter のハイライトや rustaceanvim の
+-- ftplugin が最初のバッファだけ効かない。全部の登録が済んだ最後に FileType を
+-- 撃ち直して辻褄を合わせる。
+MiniDeps.later(function()
+    for _, buf in ipairs(vim.api.nvim_list_bufs()) do
+        if vim.api.nvim_buf_is_loaded(buf) and vim.bo[buf].filetype ~= "" then
+            vim.api.nvim_exec_autocmds("FileType", { buffer = buf, modeline = false })
+        end
+    end
+end)

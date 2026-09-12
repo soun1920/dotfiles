@@ -130,7 +130,6 @@ alias clip="win32yank.exe"
 alias ssh='ssh.exe'
 alias ssh-add='ssh-add.exe'
 
-alias nvim="NVIM_APPNAME=nvim-next nvim"
 alias cdp='cd "/mnt/c/Users/aw5qm/OneDrive - Kogakuin University/個人用"'
 alias cdc="cd /home/aw5qm/.config"
 alias cda='cd "/mnt/c/Users/aw5qm/OneDrive - Kogakuin University/個人用/atcoder/"'

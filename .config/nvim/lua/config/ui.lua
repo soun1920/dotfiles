@@ -3,7 +3,20 @@ local now = MiniDeps.now
 local later = MiniDeps.later
 local map = vim.keymap.set
 
--- Oil（ファイルエクスプローラー）
+-- ステータスライン（mini.statusline から置き換え）----------------------------
+now(function()
+    add({ source = "nvim-tree/nvim-web-devicons" })
+    require("nvim-web-devicons").setup()
+
+    add({ source = "nvim-lualine/lualine.nvim" })
+    require("lualine").setup({
+        options = { theme = "auto", globalstatus = true },
+    })
+end)
+
+-- Oil（ファイルエクスプローラー）--------------------------------------------
+-- fern.vim 系5プラグイン（fern / fern-renderer-nerdfont / fern-git-status /
+-- nerdfont.vim / glyph-palette）は oil と役割が重複していたため削除した。
 now(function()
     add({ source = "stevearc/oil.nvim" })
 
@@ -101,8 +114,7 @@ vim.api.nvim_create_autocmd("VimEnter", {
 })
 
 later(function()
-    add({ source = "sainnhe/gruvbox-material" })
-
+    -- 背景の透過トグル（旧 <leader>b から移動。<leader>b は Buffer 系の prefix に）
     local buf_transparent = false
     local function toggle_buf_transparent()
         buf_transparent = not buf_transparent
@@ -122,33 +134,23 @@ later(function()
             vim.cmd("colorscheme " .. vim.g.colors_name)
         end
     end
-    map("n", "<leader>b", toggle_buf_transparent, { desc = "Toggle buffer transparency" })
+    map("n", "<leader>tb", toggle_buf_transparent, { desc = "背景の透過を切り替え" })
 
     add({ source = "akinsho/bufferline.nvim" })
     require("bufferline").setup({
-        options = { separator_style = "slant" },
+        options = {
+            separator_style = "slant",
+            close_command = function(bufnr) require("mini.bufremove").delete(bufnr, false) end,
+            right_mouse_command = function(bufnr) require("mini.bufremove").delete(bufnr, false) end,
+        },
     })
-
-    add({ source = "lambdalisue/fern.vim" })
-    vim.g["fern#renderer"] = "nerdfont"
-    add({ source = "lambdalisue/fern-renderer-nerdfont.vim" })
-    add({ source = "lambdalisue/fern-git-status.vim" })
-    add({ source = "lambdalisue/nerdfont.vim" })
-    add({ source = "lambdalisue/glyph-palette.vim" })
+    map("n", "<leader>bo", "<Cmd>BufferLineCloseOthers<CR>", { desc = "他のバッファを閉じる" })
+    map("n", "<leader>bp", "<Cmd>BufferLinePickClose<CR>", { desc = "選んで閉じる" })
 
     add({ source = "akinsho/toggleterm.nvim" })
-    require("toggleterm").setup()
+    require("toggleterm").setup({ open_mapping = [[<C-\>]] })
 
-    vim.api.nvim_create_autocmd("FileType", {
-        pattern = "fern",
-        group = vim.api.nvim_create_augroup("FernSetting", { clear = true }),
-        callback = function(args)
-            vim.keymap.set("n", "<CR>", "<Plug>(fern-action-open:background)", {
-                buffer = args.buf,
-                noremap = true,
-                silent = true,
-                desc = "Fern: Open file in background",
-            })
-        end,
-    })
+    -- LSP の進捗表示（rust-analyzer / clangd の index 状況が見える）
+    add({ source = "j-hui/fidget.nvim" })
+    require("fidget").setup()
 end)

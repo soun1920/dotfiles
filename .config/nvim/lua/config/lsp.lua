@@ -1,5 +1,6 @@
 local add = MiniDeps.add
 add({ source = "williamboman/mason.nvim" })
+add({ source = "WhoIsSethDaniel/mason-tool-installer.nvim" })
 add({ source = "neovim/nvim-lspconfig" })
 add({ source = "hrsh7th/nvim-cmp" })
 add({ source = "hrsh7th/cmp-nvim-lsp" })
@@ -7,135 +8,59 @@ add({ source = "hrsh7th/cmp-buffer" })
 add({ source = "hrsh7th/cmp-path" })
 add({ source = "hrsh7th/cmp-emoji" })
 add({ source = "saadparwaiz1/cmp_luasnip" })
-add({ source = "dnlhc/glance.nvim" })
+add({ source = "zbirenbaum/copilot.lua" })
+add({ source = "zbirenbaum/copilot-cmp" })
+-- 削除: glance.nvim … telescope / trouble と役割が重複していて未使用だった
 
-require("mason").setup({
+-- Copilot は copilot-cmp 経由で nvim-cmp の source として使うため、
+-- 標準のゴーストテキスト/パネルは切っておく（cmp と二重に出るのを防ぐ）。
+require("copilot").setup({
+    suggestion = { enabled = false },
+    panel = { enabled = false },
+})
+require("copilot_cmp").setup()
+
+require("mason").setup()
+
+-- mason.nvim の setup() に ensure_installed は存在しない（旧設定では
+-- 指定していたが黙って無視され、stylua / prettier / gofumpt が未導入だった）。
+-- 実際に入れるのは mason-tool-installer の仕事。
+require("mason-tool-installer").setup({
     ensure_installed = {
         -- LSP servers
-        "rust-analyzer", "gopls", "ruff", "typescript-language-server", "clangd", "lua-language-server", "deno",
-        "veryl-ls", "html-lsp", "css-lsp", "emmet-language-server",
-        -- Formatters
-        "rustfmt", "gofumpt", "prettier", "clang-format", "stylua",
-        -- Linters
-        "golangci-lint", "eslint_d",
+        "rust-analyzer", "gopls", "ruff", "ty", "typescript-language-server",
+        "clangd", "jdtls", "kotlin-language-server", "lua-language-server", "tinymist", "veryl-ls",
+        "html-lsp", "css-lsp", "emmet-language-server",
+        -- Formatters（rustfmt は rustup 側、clang-format は /usr/bin にあるので除外）
+        "stylua", "prettier", "gofumpt",
     },
+    run_on_start = true,
+    start_delay = 3000,
+    debounce_hours = 24,
 })
 
 -- LSP capabilities
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 
--- Try to get nvim-cmp capabilities if available
 local has_cmp, cmp_nvim_lsp = pcall(require, 'cmp_nvim_lsp')
 if has_cmp then
     capabilities = cmp_nvim_lsp.default_capabilities(capabilities)
 end
 
--- On attach function
-local on_attach = function(client, bufnr)
-    local opts = { noremap = true, silent = true, buffer = bufnr }
+-- 共通 on_attach（rustaceanvim と共有するため別ファイル）
+local on_attach = require("config.lsp_attach")
 
-    -- Navigation
-    vim.keymap.set('n', 'gd', vim.lsp.buf.definition, opts)
-    vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, opts)
-    vim.keymap.set('n', 'gi', vim.lsp.buf.implementation, opts)
-    vim.keymap.set('n', 'go', vim.lsp.buf.type_definition, opts)
-    vim.keymap.set('n', 'gr', vim.lsp.buf.references, opts)
+-- rust_analyzer は rustaceanvim（lang.lua）が起動するため、ここでは設定しない。
 
-    -- Hover and help
-    vim.keymap.set('n', 'K', vim.lsp.buf.hover, opts)
-    vim.keymap.set('i', '<C-h>', vim.lsp.buf.signature_help, opts)
-
-    -- Workspace
-    vim.keymap.set('n', '<leader>vws', vim.lsp.buf.workspace_symbol, opts)
-
-    -- Diagnostics
-    vim.keymap.set('n', '<leader>vd', vim.diagnostic.open_float, opts)
-    vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, opts)
-    vim.keymap.set('n', ']d', vim.diagnostic.goto_next, opts)
-
-    -- Code actions
-    vim.keymap.set('n', '<leader>vca', vim.lsp.buf.code_action, opts)
-    vim.keymap.set('v', '<leader>vca', vim.lsp.buf.code_action, opts)
-
-    -- Rename
-    vim.keymap.set('n', '<leader>vrn', vim.lsp.buf.rename, opts)
-    vim.keymap.set('n', '<leader>vrr', vim.lsp.buf.references, opts)
-
-    -- Toggle inlay hints if supported (Neovim 0.10+): hide while typing, show on leaving insert mode
-    if vim.lsp.inlay_hint and client:supports_method('textDocument/inlayHint') then
-        vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
-
-        local group = vim.api.nvim_create_augroup('LspInlayHintToggle', { clear = false })
-        vim.api.nvim_create_autocmd('InsertEnter', {
-            group = group,
-            buffer = bufnr,
-            callback = function()
-                vim.lsp.inlay_hint.enable(false, { bufnr = bufnr })
-            end,
-        })
-        vim.api.nvim_create_autocmd('InsertLeave', {
-            group = group,
-            buffer = bufnr,
-            callback = function()
-                vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
-            end,
-        })
-    end
-end
-
--- Configure LSP servers using vim.lsp.config (Neovim 0.11+)
-vim.lsp.config('rust_analyzer', {
-    cmd = { 'rust-analyzer' },
-    filetypes = { 'rust' },
-    root_markers = { 'Cargo.toml', 'rust-project.json' },
+-- Java / Kotlin
+vim.lsp.config('jdtls', {
     on_attach = on_attach,
     capabilities = capabilities,
-    settings = {
-        ["rust-analyzer"] = {
-            cargo = {
-                allFeatures = true,
-            },
-            checkOnSave = true,
-            check = {
-                command = "clippy",
-            },
-            procMacro = {
-                enable = true,
-            },
-            inlayHints = {
-                bindingModeHints = {
-                    enable = false,
-                },
-                chainingHints = {
-                    enable = true,
-                },
-                closingBraceHints = {
-                    enable = true,
-                    minLines = 25,
-                },
-                closureReturnTypeHints = {
-                    enable = "never",
-                },
-                lifetimeElisionHints = {
-                    enable = "never",
-                    useParameterNames = false,
-                },
-                maxLength = 25,
-                parameterHints = {
-                    enable = true,
-                },
-                reborrowHints = {
-                    enable = "never",
-                },
-                renderColons = true,
-                typeHints = {
-                    enable = true,
-                    hideClosureInitialization = false,
-                    hideNamedConstructor = false,
-                },
-            },
-        },
-    },
+})
+
+vim.lsp.config('kotlin_language_server', {
+    on_attach = on_attach,
+    capabilities = capabilities,
 })
 
 -- Go
@@ -147,20 +72,13 @@ vim.lsp.config('gopls', {
     capabilities = capabilities,
     settings = {
         gopls = {
-            analyses = {
-                unusedparams = true,
-            },
+            analyses = { unusedparams = true },
             staticcheck = true,
             gofumpt = true,
             codelenses = {
-                gc_details = false,
-                generate = true,
-                regenerate_cgo = true,
-                run_govulncheck = true,
-                test = true,
-                tidy = true,
-                upgrade_dependency = true,
-                vendor = true,
+                gc_details = false, generate = true, regenerate_cgo = true,
+                run_govulncheck = true, test = true, tidy = true,
+                upgrade_dependency = true, vendor = true,
             },
             hints = {
                 assignVariableTypes = true,
@@ -194,6 +112,15 @@ vim.lsp.config('ty', {
 })
 
 -- TypeScript/JavaScript
+local ts_inlay_hints = {
+    includeInlayParameterNameHints = "all",
+    includeInlayParameterNameHintsWhenArgumentMatchesName = false,
+    includeInlayFunctionParameterTypeHints = true,
+    includeInlayVariableTypeHints = true,
+    includeInlayPropertyDeclarationTypeHints = true,
+    includeInlayFunctionLikeReturnTypeHints = true,
+    includeInlayEnumMemberValueHints = true,
+}
 vim.lsp.config('ts_ls', {
     cmd = { 'typescript-language-server', '--stdio' },
     filetypes = { 'javascript', 'javascriptreact', 'javascript.jsx', 'typescript', 'typescriptreact', 'typescript.tsx' },
@@ -201,49 +128,23 @@ vim.lsp.config('ts_ls', {
     on_attach = on_attach,
     capabilities = capabilities,
     settings = {
-        typescript = {
-            inlayHints = {
-                includeInlayParameterNameHints = "all",
-                includeInlayParameterNameHintsWhenArgumentMatchesName = false,
-                includeInlayFunctionParameterTypeHints = true,
-                includeInlayVariableTypeHints = true,
-                includeInlayPropertyDeclarationTypeHints = true,
-                includeInlayFunctionLikeReturnTypeHints = true,
-                includeInlayEnumMemberValueHints = true,
-            },
-        },
-        javascript = {
-            inlayHints = {
-                includeInlayParameterNameHints = "all",
-                includeInlayParameterNameHintsWhenArgumentMatchesName = false,
-                includeInlayFunctionParameterTypeHints = true,
-                includeInlayVariableTypeHints = true,
-                includeInlayPropertyDeclarationTypeHints = true,
-                includeInlayFunctionLikeReturnTypeHints = true,
-                includeInlayEnumMemberValueHints = true,
-            },
-        },
+        typescript = { inlayHints = ts_inlay_hints },
+        javascript = { inlayHints = ts_inlay_hints },
     },
 })
 
 -- C/C++ clangd 専用 on_attach（switchSourceHeader を追加）
 local on_attach_clangd = function(client, bufnr)
     on_attach(client, bufnr)
-    vim.keymap.set('n', '<leader>h',
-        '<cmd>ClangdSwitchSourceHeader<cr>',
+    vim.keymap.set('n', '<leader>h', '<cmd>ClangdSwitchSourceHeader<cr>',
         { noremap = true, silent = true, buffer = bufnr, desc = "Switch Header/Source" })
 end
 
--- C/C++
 vim.lsp.config('clangd', {
     cmd = {
-        "clangd",
-        "--background-index",
-        "--clang-tidy",
-        "--header-insertion=iwyu",
-        "--completion-style=detailed",
-        "--function-arg-placeholders",
-        "--fallback-style=llvm",
+        "clangd", "--background-index", "--clang-tidy",
+        "--header-insertion=iwyu", "--completion-style=detailed",
+        "--function-arg-placeholders", "--fallback-style=llvm",
     },
     filetypes = { 'c', 'cpp', 'objc', 'objcpp', 'cuda' },
     root_markers = { '.clangd', '.clang-tidy', '.clang-format', 'compile_commands.json', 'compile_flags.txt', 'configure.ac', '.git' },
@@ -274,25 +175,12 @@ vim.lsp.config('lua_ls', {
     capabilities = capabilities,
     settings = {
         Lua = {
-            runtime = {
-                version = 'LuaJIT',
-            },
-            diagnostics = {
-                globals = { 'vim' },
-            },
-            workspace = {
-                library = { vim.env.VIMRUNTIME },
-                checkThirdParty = false,
-            },
-            completion = {
-                callSnippet = "Replace",
-            },
-            telemetry = {
-                enable = false,
-            },
-            hint = {
-                enable = true,
-            },
+            runtime = { version = 'LuaJIT' },
+            diagnostics = { globals = { 'vim', 'MiniDeps', 'MiniAi' } },
+            workspace = { library = { vim.env.VIMRUNTIME }, checkThirdParty = false },
+            completion = { callSnippet = "Replace" },
+            telemetry = { enable = false },
+            hint = { enable = true },
         },
     },
 })
@@ -324,9 +212,7 @@ vim.lsp.config('html', {
     root_markers = { 'package.json', '.git' },
     on_attach = on_attach,
     capabilities = capabilities,
-    init_options = {
-        provideFormatter = false, -- フォーマットは conform.nvim (prettier) に任せる
-    },
+    init_options = { provideFormatter = false }, -- フォーマットは conform (prettier) に任せる
 })
 
 -- CSS/SCSS/LESS
@@ -343,7 +229,7 @@ vim.lsp.config('cssls', {
     },
 })
 
--- Emmet（HTML/CSS/JSXでの高速マークアップ補完）
+-- Emmet
 vim.lsp.config('emmet_ls', {
     cmd = { 'emmet-language-server', '--stdio' },
     filetypes = { 'html', 'css', 'scss', 'less', 'javascriptreact', 'typescriptreact' },
@@ -352,9 +238,8 @@ vim.lsp.config('emmet_ls', {
     capabilities = capabilities,
 })
 
--- Enable LSP servers (required in Neovim 0.11+)
 vim.lsp.enable({
-    'rust_analyzer', 'gopls', 'ruff', 'ty', 'ts_ls', 'clangd', 'lua_ls', 'tinymist', 'veryl_ls',
+    'gopls', 'ruff', 'ty', 'ts_ls', 'clangd', 'jdtls', 'kotlin_language_server', 'lua_ls', 'tinymist', 'veryl_ls',
     'html', 'cssls', 'emmet_ls', 'buf_ls',
 })
 
@@ -367,9 +252,7 @@ vim.api.nvim_create_autocmd("ColorScheme", { pattern = "*", callback = apply_hl 
 
 -- Diagnostic configuration
 vim.diagnostic.config({
-    virtual_text = {
-        prefix = '●',
-    },
+    virtual_text = { prefix = '●' },
     signs = {
         text = {
             [vim.diagnostic.severity.ERROR] = " ",
@@ -383,10 +266,11 @@ vim.diagnostic.config({
     severity_sort = true,
     float = {
         border = 'rounded',
-        source = 'always',
+        source = true, -- 'always' は deprecated
         header = '',
         prefix = '',
     },
+    jump = { float = true }, -- ]d / [d でジャンプしたとき診断をフロートで出す
 })
 
 -- Setup nvim-cmp
@@ -395,17 +279,13 @@ local luasnip = require('luasnip')
 require('luasnip.loaders.from_lua').load({ paths = vim.fn.stdpath('config') .. '/lua/snippets' })
 
 cmp.setup({
-    performance = {
-        max_view_entries = 10,
-    },
+    performance = { max_view_entries = 10 },
     window = {
         completion    = cmp.config.window.bordered(),
         documentation = cmp.config.window.bordered(),
     },
     snippet = {
-        expand = function(args)
-            luasnip.lsp_expand(args.body)
-        end,
+        expand = function(args) luasnip.lsp_expand(args.body) end,
     },
     mapping = cmp.mapping.preset.insert({
         ['<C-b>'] = cmp.mapping.scroll_docs(-4),
@@ -432,9 +312,26 @@ cmp.setup({
             end
         end, { 'i', 's' }),
     }),
+    -- copilot を最優先で並べる（cmp-copilot-cmp 推奨のコンパレータ）
+    sorting = {
+        priority_weight = 2,
+        comparators = {
+            require('copilot_cmp.comparators').prioritize,
+            cmp.config.compare.offset,
+            cmp.config.compare.exact,
+            cmp.config.compare.score,
+            cmp.config.compare.recently_used,
+            cmp.config.compare.locality,
+            cmp.config.compare.kind,
+            cmp.config.compare.sort_text,
+            cmp.config.compare.length,
+            cmp.config.compare.order,
+        },
+    },
     sources = cmp.config.sources({
-        { name = 'nvim_lsp' },
-        { name = 'luasnip' },
+        { name = 'copilot', group_index = 2 },
+        { name = 'nvim_lsp', group_index = 2 },
+        { name = 'luasnip', group_index = 2 },
     }, {
         { name = 'buffer' },
         { name = 'path' },

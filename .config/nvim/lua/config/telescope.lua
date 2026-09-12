@@ -55,17 +55,21 @@ local grep_excludes = {
     "--glob=!.mypy_cache/*",
     "--glob=!.pytest_cache/*",
     "--glob=!.ruff_cache/*",
+    "--glob=!target/*",
 }
 
-map("n", "<leader>ff", builtin.find_files,  { desc = "Find files" })
+map("n", "<leader>ff", builtin.find_files, { desc = "Find files" })
 map("n", "<leader>fg", function()
     builtin.live_grep({ cwd = get_git_root(), additional_args = grep_excludes })
 end, { desc = "Live grep (git root)" })
-map("n", "<leader>fb", builtin.buffers,     { desc = "Buffers" })
-map("n", "<leader>fh", builtin.help_tags,   { desc = "Help tags" })
-map("n", "<leader>fr", builtin.oldfiles,    { desc = "Recent files" })
+map("n", "<leader>fb", builtin.buffers, { desc = "Buffers" })
+map("n", "<leader>fh", builtin.help_tags, { desc = "Help tags" })
+map("n", "<leader>fr", builtin.oldfiles, { desc = "Recent files" })
 map("n", "<leader>fd", builtin.diagnostics, { desc = "Diagnostics" })
 map("n", "<leader>fs", builtin.lsp_document_symbols, { desc = "Document symbols" })
-map("n", "gr",         builtin.lsp_references,       { desc = "LSP references" })
-map("n", "gd",         builtin.lsp_definitions,      { desc = "LSP definitions" })
 map("n", "<leader>fu", telescope.extensions.undo.undo, { desc = "Undo tree" })
+map("n", "<leader>fk", builtin.keymaps, { desc = "Keymaps" })
+map("n", "<leader>fw", builtin.grep_string, { desc = "カーソル下の語を検索" })
+
+-- gd / gr / gi は LSP が attach したバッファでのみ有効にする（lsp.lua の on_attach）。
+-- ここでグローバルに張ると on_attach に上書きされて死にマップになるため。
