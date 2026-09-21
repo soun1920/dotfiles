@@ -33,7 +33,13 @@ fish_add_path "$HOME/.local/bin"
 # ==============================================================================
 # Homebrew
 # ==============================================================================
-# eval (/home/linuxbrew/.linuxbrew/bin/brew shellenv)
+if test "$is_macos" = "1"
+    if test -x /opt/homebrew/bin/brew
+        eval (/opt/homebrew/bin/brew shellenv)
+    end
+else if test -x /home/linuxbrew/.linuxbrew/bin/brew
+    eval (/home/linuxbrew/.linuxbrew/bin/brew shellenv)
+end
 
 # ==============================================================================
 # ツール初期化
