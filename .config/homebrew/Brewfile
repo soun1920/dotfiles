@@ -1,0 +1,56 @@
+tap "homebrew/cask-versions"
+# Get a file from an HTTP, HTTPS or FTP server
+brew "curl"
+# Tools for browsing and manipulating docker registries
+brew "docker-ls"
+# User-friendly command-line shell for UNIX-like operating systems
+brew "fish"
+# GitHub command-line tool (mise's aqua backend fails attestation verification here; keep via brew until fixed)
+brew "gh"
+# Distributed revision control system
+brew "git"
+# Next-gen compiler infrastructure
+brew "llvm"
+# Swiss-army knife of markup format conversion
+brew "pandoc"
+# Execute binaries from Python packages in isolated environments
+brew "pipx"
+# Python version management
+brew "pyenv"
+# Interpreted, interactive, object-oriented programming language
+brew "python@3.10"
+# Generate your Xcode project from a spec file and your folder structure
+brew "xcodegen"
+# Yet Another Dotfiles Manager
+brew "yadm"
+# Desktop password and login vault
+cask "bitwarden"
+# All-in-one toolbox for developers
+cask "devutils"
+# Voice and text chat software
+cask "discord"
+# NDI integration for OBS Studio
+cask "distroav"
+# App to build and share containerised applications and microservices
+cask "docker-desktop"
+# Web browser
+cask "firefox@developer-edition"
+# Terminal emulator that uses platform-native UI and GPU acceleration
+cask "ghostty"
+# Web browser
+cask "google-chrome"
+# Java IDE by JetBrains
+cask "intellij-idea"
+# Terminal emulator as alternative to Apple's Terminal app
+cask "iterm2"
+# Customise mouse behavior
+cask "linearmouse"
+cask "nautilus"
+# Open-source software for live streaming and screen recording
+cask "obs"
+# Knowledge base that works on top of a local folder of plain text Markdown files
+cask "obsidian"
+# Open-source code editor
+cask "visual-studio-code"
+# GPU-accelerated cross-platform terminal emulator and multiplexer
+cask "wezterm@nightly"

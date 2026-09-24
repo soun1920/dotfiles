@@ -3,7 +3,25 @@
 # ==============================================================================
 set -gx XDG_CONFIG_HOME "$HOME/.config"
 set -gx WASMTIME_HOME "$HOME/.wasmtime"
-set -gx EDITOR "/home/aw5qm/.local/bin/zed"
+
+# OS判定（Mac / WSL等のLinux環境で切り替え）
+set -g is_macos (test (uname) = "Darwin"; and echo 1; or echo 0)
+set -g is_wsl 0
+if test -f /proc/version
+    if string match -qi '*microsoft*' (cat /proc/version)
+        set is_wsl 1
+    end
+end
+
+if test "$is_macos" = "1"
+    if command -v zed >/dev/null 2>&1
+        set -gx EDITOR "zed"
+    else
+        set -gx EDITOR "nvim"
+    end
+else
+    set -gx EDITOR "$HOME/.local/bin/zed"
+end
 
 # 履歴設定（fishはデフォルトで ~/.local/share/fish/fish_history）
 set -gx fish_history_max 100000
@@ -15,7 +33,13 @@ fish_add_path "$HOME/.local/bin"
 # ==============================================================================
 # Homebrew
 # ==============================================================================
-# eval (/home/linuxbrew/.linuxbrew/bin/brew shellenv)
+if test "$is_macos" = "1"
+    if test -x /opt/homebrew/bin/brew
+        eval (/opt/homebrew/bin/brew shellenv)
+    end
+else if test -x /home/linuxbrew/.linuxbrew/bin/brew
+    eval (/home/linuxbrew/.linuxbrew/bin/brew shellenv)
+end
 
 # ==============================================================================
 # ツール初期化
@@ -46,9 +70,6 @@ alias ls "ls --color=auto"
 alias grep "grep --color=auto"
 alias nv "nvim ."
 alias python "python3"
-alias clip "win32yank.exe"
-# alias ssh "ssh.exe"
-# alias ssh-add "ssh-add.exe"
 
 # ディレクトリ移動
 # alias cdp 'cd "/mnt/c/Users/aw5qm/OneDrive - Kogakuin University/個人用"'
@@ -152,7 +173,7 @@ end
 set -g fish_greeting
 
 # pnpm
-set -gx PNPM_HOME "/home/aw5qm/.local/share/pnpm"
+set -gx PNPM_HOME "$HOME/.local/share/pnpm"
 if not string match -q -- $PNPM_HOME $PATH
   set -gx PATH "$PNPM_HOME" $PATH
 end

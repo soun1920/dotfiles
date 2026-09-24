@@ -81,7 +81,7 @@ _cached_eval() {
     source "$cache"
 }
 
-_cached_eval mise    /home/aw5qm/.local/bin/mise activate zsh
+_cached_eval mise    "$HOME/.local/bin/mise" activate zsh
 
 # ROS2 (mise activate でキャッシュが PATH を上書きするため、必ず後に source する)
 # ==============================================================================
@@ -126,13 +126,17 @@ fi
 alias ll="ls -l"
 alias nv='nvim .'
 alias python="python3"
-alias clip="win32yank.exe"
-alias ssh='ssh.exe'
-alias ssh-add='ssh-add.exe'
+alias cdc="cd $HOME/.config"
 
-alias cdp='cd "/mnt/c/Users/aw5qm/OneDrive - Kogakuin University/個人用"'
-alias cdc="cd /home/aw5qm/.config"
-alias cda='cd "/mnt/c/Users/aw5qm/OneDrive - Kogakuin University/個人用/atcoder/"'
+if [ -f /proc/version ] && grep -qi microsoft /proc/version; then
+    alias clip="win32yank.exe"
+    alias ssh='ssh.exe'
+    alias ssh-add='ssh-add.exe'
+    alias cdp='cd "/mnt/c/Users/aw5qm/OneDrive - Kogakuin University/個人用"'
+    alias cda='cd "/mnt/c/Users/aw5qm/OneDrive - Kogakuin University/個人用/atcoder/"'
+elif [ "$(uname)" = "Darwin" ]; then
+    alias clip="pbcopy"
+fi
 
 alias actv="source .venv/bin/activate"
 alias activate="source .venv/bin/activate"
