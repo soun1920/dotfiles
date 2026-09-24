@@ -34,7 +34,81 @@ tinymist = "latest"
 buf = "latest"
 zig = "latest"
 java = "21"
+pandoc = "latest"
+pipx = "latest"
+python = "3.10"
+yadm = "latest"
+xcodegen = { version = "latest", os = ["macos"] }
 
 [settings]
 idiomatic_version_file_enable_tools = ["python"]
 experimental = true
+
+[bootstrap.hooks]
+pre-packages = "command -v dnf >/dev/null 2>&1 && sudo dnf copr enable -y avengemedia/danklinux || true"
+
+[bootstrap.packages]
+"apt:git" = "latest"
+"dnf:git" = "latest"
+"apt:curl" = "latest"
+"dnf:curl" = "latest"
+"apt:fish" = "latest"
+"dnf:fish" = "latest"
+"apt:gh" = "latest"
+"dnf:gh" = "latest"
+"apt:llvm" = "latest"
+"dnf:llvm" = "latest"
+"apt:clang" = "latest"
+"dnf:clang" = "latest"
+"apt:distrobox" = "latest"
+"dnf:distrobox" = "latest"
+"apt:ffmpeg" = "latest"
+"dnf:ffmpeg" = "latest"
+"apt:rsync" = "latest"
+"dnf:rsync" = "latest"
+"apt:tree" = "latest"
+"dnf:tree" = "latest"
+"apt:unzip" = "latest"
+"dnf:unzip" = "latest"
+"apt:xclip" = "latest"
+"dnf:xclip" = "latest"
+"apt:xsel" = "latest"
+"dnf:xsel" = "latest"
+"apt:zip" = "latest"
+"dnf:zip" = "latest"
+"apt:zsh" = "latest"
+"dnf:zsh" = "latest"
+"apt:wl-clipboard" = "latest"
+"dnf:wl-clipboard" = "latest"
+"apt:build-essential" = "latest"
+"dnf:gcc" = "latest"
+"dnf:make" = "latest"
+"apt:gnupg" = "latest"
+"dnf:gnupg2" = "latest"
+"apt:openssh-client" = "latest"
+"dnf:openssh-clients" = "latest"
+"dnf:cliphist" = "latest"
+
+# git/fish/curl は nix-config の home-manager / macOS 標準搭載を使うため brew では入れない
+"brew:docker-ls" = { os = "macos" }
+"brew:gh" = { os = "macos" }
+"brew:llvm" = { os = "macos" }
+"brew-cask:bitwarden" = { os = "macos" }
+"brew-cask:devutils" = { os = "macos" }
+"brew-cask:discord" = { os = "macos" }
+"brew-cask:distroav" = { os = "macos" }
+"brew-cask:docker-desktop" = { os = "macos" }
+"brew-cask:firefox@developer-edition" = { os = "macos" }
+"brew-cask:ghostty" = { os = "macos" }
+"brew-cask:google-chrome" = { os = "macos" }
+"brew-cask:intellij-idea" = { os = "macos" }
+"brew-cask:iterm2" = { os = "macos" }
+"brew-cask:linearmouse" = { os = "macos" }
+"brew-cask:nautilus" = { os = "macos" }
+"brew-cask:obs" = { os = "macos" }
+"brew-cask:obsidian" = { os = "macos" }
+"brew-cask:visual-studio-code" = { os = "macos" }
+"brew-cask:wezterm@nightly" = { os = "macos" }
+
+[bootstrap.brew.taps]
+"homebrew/cask-versions" = "https://github.com/homebrew/homebrew-cask-versions.git"

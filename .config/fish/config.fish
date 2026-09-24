@@ -65,8 +65,9 @@ end
 # エイリアス（abbreviationsを推奨）
 # ==============================================================================
 # 基本コマンド
-alias ll "ls -l"
-alias ls "ls --color=auto"
+alias ll "eza -l --icons"
+alias lls "eza -l --icons --sort=modified"
+alias ls "eza --icons"
 alias grep "grep --color=auto"
 alias nv "nvim ."
 alias python "python3"
@@ -76,6 +77,18 @@ alias python "python3"
 # alias cdc "cd /home/aw5qm/.config"
 # alias cda 'cd "/mnt/c/Users/aw5qm/OneDrive - Kogakuin University/個人用/atcoder/"'
 #
+alias cdc "cd $HOME/.config"
+
+if test "$is_wsl" = "1"
+    alias clip "win32yank.exe"
+    # alias ssh "ssh.exe"
+    # alias ssh-add "ssh-add.exe"
+    alias cdp 'cd "/mnt/c/Users/aw5qm/OneDrive - Kogakuin University/個人用"'
+    alias cda 'cd "/mnt/c/Users/aw5qm/OneDrive - Kogakuin University/個人用/atcoder/"'
+else if test "$is_macos" = "1"
+    alias clip "pbcopy"
+end
+
 # Python仮想環境
 alias actv "source .venv/bin/activate.fish"
 alias activate "source .venv/bin/activate.fish"
