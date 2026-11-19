@@ -71,6 +71,11 @@ alias ls "eza --icons"
 alias grep "grep --color=auto"
 alias nv "nvim ."
 alias python "python3"
+alias ros "distrobox enter ros2-humble"
+
+# キーボード配列の切り替え（niri の layout "jp,us" の番号）
+alias jis "niri msg action switch-layout 0"
+alias us "niri msg action switch-layout 1"
 
 # ディレクトリ移動
 # alias cdp 'cd "/mnt/c/Users/aw5qm/OneDrive - Kogakuin University/個人用"'
@@ -195,3 +200,6 @@ end
 
 # Added by Antigravity CLI installer
 set -gx PATH "/home/aw5qm/.local/bin" $PATH
+
+# opencode
+fish_add_path /home/aw5qm/.opencode/bin

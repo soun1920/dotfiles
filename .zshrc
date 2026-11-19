@@ -81,6 +81,8 @@ _cached_eval() {
     source "$cache"
 }
 
+# ROS コンテナでは apt の python3 を使う。mise の python には python3-yaml など ROS の依存が無い
+[ -f /opt/ros/humble/setup.zsh ] && export MISE_DISABLE_TOOLS=python
 _cached_eval mise    "$HOME/.local/bin/mise" activate zsh
 
 # ROS2 (mise activate でキャッシュが PATH を上書きするため、必ず後に source する)
@@ -247,6 +249,47 @@ function setros() {
     echo "実行: $found"
     source "$found"
 }
+
+# ROS2 ワークスペース自動 source: 上の階層の install/setup.zsh を cd 時に読み、外に出たら戻す
+# 戻す時は setup.zsh が足した要素だけを取り除くので、後から PATH に足したもの (mise 等) は残る
+typeset -g _ros_ws_root=""
+typeset -gA _ros_ws_before _ros_ws_added   # source 前の値 / setup.zsh が足した要素
+_ros_ws_chpwd() {
+    [[ -n $ROS_DISTRO ]] || return   # /opt/ros の無い環境 (distrobox の外) では何もしない
+    local dir=$PWD k
+    until [[ -f $dir/install/setup.zsh || $dir == / ]]; do dir=${dir:h}; done
+    [[ -f $dir/install/setup.zsh ]] || dir=""
+    [[ $dir == $_ros_ws_root ]] && return
+
+    if [[ -n $_ros_ws_root ]]; then
+        local -a cur add
+        for k in ${(k)_ros_ws_added}; do
+            cur=(${(s.:.)${(P)k}}) add=(${(s.:.)_ros_ws_added[$k]})
+            cur=(${cur:|add})
+            if (( $#cur )); then export "$k=${(j.:.)cur}"
+            elif (( ${+_ros_ws_before[$k]} )); then export "$k=$_ros_ws_before[$k]"
+            else unset $k; fi
+        done
+        print -u2 "ros: unloaded $_ros_ws_root"
+    fi
+    _ros_ws_root=$dir _ros_ws_before=() _ros_ws_added=()
+    [[ -n $dir ]] || return
+
+    local -A snap
+    local -a old new
+    for k in ${(k)parameters[(R)*export*]}; do snap[$k]=${(P)k}; done
+    source $dir/install/setup.zsh
+    for k in ${(k)parameters[(R)*export*]}; do
+        (( ${+snap[$k]} )) && [[ $snap[$k] == ${(P)k} ]] && continue
+        (( ${+snap[$k]} )) && _ros_ws_before[$k]=$snap[$k]
+        old=(${(s.:.)snap[$k]}) new=(${(s.:.)${(P)k}})
+        _ros_ws_added[$k]=${(j.:.)${new:|old}}
+    done
+    print -u2 "ros: sourced $_ros_ws_root/install/setup.zsh"
+}
+autoload -Uz add-zsh-hook
+add-zsh-hook chpwd _ros_ws_chpwd
+_ros_ws_chpwd   # 起動時のディレクトリにも適用
 
 # ==============================================================================
 # zoxide
