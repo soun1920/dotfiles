@@ -11,6 +11,7 @@
     "font_size": 12.0
   },
   "reduce_motion": "on",
+  "autosave": { "after_delay": { "milliseconds": 10000 } },
   "cli_default_open_behavior": "existing_window",
   "project_panel": {
     "dock": "left"
@@ -35,9 +36,17 @@
       "type": "registry"
     },
     "opencode": {
+      "default_config_options": {
+        "model": "opencode/deepseek-v4.1-flash-free"
+      },
       "type": "registry"
     },
     "claude-acp": {
+      "default_config_options": {
+        "mode": "auto",
+        "model": "opus",
+        "effort": "medium"
+      },
       "favorite_config_option_values": {
         "mode": [
           "plan"
@@ -143,7 +152,22 @@
     "show_other_hints": true,
     "edit_debounce_ms": 700,
     "scroll_debounce_ms": 50,
-  },  "experimental.theme_overrides": {
+  },
+  "auto_install_extensions": {
+    "typst": true,
+  },
+  "lsp": {
+    "tinymist": {
+      "binary": {
+        "path": "/home/aw5qm/.local/share/mise/installs/tinymist/latest/tinymist",
+      },
+      "settings": {
+        "exportPdf": "onSave",
+        "projectResolution": "lockDatabase",
+      },
+    },
+  },
+  "experimental.theme_overrides": {
 
   }
 }

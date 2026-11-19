@@ -17,7 +17,7 @@ neovim = "latest"
 node = "latest"
 pnpm = "latest"
 ripgrep = "latest"
-rust = "latest"
+rust = { version = "latest", mr_boxington = true }
 starship = "latest"
 tmux = "latest"
 uv = "latest"
@@ -39,6 +39,13 @@ pipx = "latest"
 python = "3.10"
 yadm = "latest"
 xcodegen = { version = "latest", os = ["macos"] }
+arduino-cli = "latest"
+herdr = "latest"
+bottom = "latest"
+resvg = "latest"
+rclone = "latest"
+mr-boxington = "latest"
+"npm:nb.sh" = "latest"
 
 [settings]
 idiomatic_version_file_enable_tools = ["python"]
