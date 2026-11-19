@@ -1,0 +1,2 @@
+# fish が自動で書き換え、マシンごとの値や秘密情報が入るので追跡しない。設定は config.fish に書く。
+/fish_variables

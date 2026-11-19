@@ -26,10 +26,10 @@ end
 # 履歴設定（fishはデフォルトで ~/.local/share/fish/fish_history）
 set -gx fish_history_max 100000
 
-# PATH設定
-fish_add_path "{$ASDF_DATA_DIR:-$HOME/.asdf}/shims"
-fish_add_path "$WASMTIME_HOME/bin"
-fish_add_path "$HOME/.local/bin"
+# PATH設定（-g でグローバル変数にし、fish_variables に書き込まない）
+fish_add_path -g "{$ASDF_DATA_DIR:-$HOME/.asdf}/shims"
+fish_add_path -g "$WASMTIME_HOME/bin"
+fish_add_path -g "$HOME/.local/bin"
 # ==============================================================================
 # Homebrew
 # ==============================================================================
@@ -202,4 +202,4 @@ end
 set -gx PATH "/home/aw5qm/.local/bin" $PATH
 
 # opencode
-fish_add_path /home/aw5qm/.opencode/bin
+fish_add_path -g /home/aw5qm/.opencode/bin
