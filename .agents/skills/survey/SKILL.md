@@ -1,129 +1,29 @@
 ---
 name: survey
-description: Investigate a topic across papers, articles, social-media posts, and industry signals, then deliver an indexed Markdown report. Use when the user asks to investigate, survey, gather sources, build an index, collect evidence, round up references, or otherwise wants a thorough cross-source roundup on a specific topic. Depends on documenting-with-sources and writing-quotation.
+description: 複数の文献・記事・業界動向を横断調査し、出典一覧と索引を持つ Markdown レポートを作る。単一の事実確認には使わない。
 ---
 
-# Survey
+# 横断調査
 
-Gather sources from the web, papers, social media, and industry on a specific topic, and produce an indexed Markdown report.
+調査範囲に合う資料を集め、各資料の主張と根拠を比較できるレポートにする。[出典の共通規約](../documenting-with-sources/SKILL.md) に従う。
 
-This skill follows the shared sourced-writing conventions defined in `documenting-with-sources`. Read `documenting-with-sources` before drafting.
+## 調査範囲
 
-## Quality criteria
+- ユーザーが指定した問い、期間、対象を優先する。論文、製品仕様、利用者の反応など、問いに必要な種類の資料を選ぶ。
+- 技術仕様は公式文書や実装、研究結果は原論文、利用者の反応は当事者の投稿で確認する。一次情報と二次情報を区別する。
+- 著者、題名、日付、URL、重要な根拠の位置を記録する。所属や被引用数は比較に必要な場合に調べ、取得日時を示す。未取得の項目のために本筋を止めない。
+- 分担が許可され、独立した観点がある場合は並行調査してよい。使用できるエージェント数を超えず、同じ成果物への同時編集を避ける。
 
-Apply to every source.
+## 統合
 
-- Prefer trustworthy sources (peer-reviewed papers > official blogs > major industry media > personal blogs).
-- If the author is an individual, list their affiliation and role. If unknown, look it up.
-- For papers, in addition to bibliographic info (authors, affiliations, venue, year), include citation count.
-- Always attach a URL.
-- Always attach a date.
-- Treat official documentation and third-party articles as different reliability tiers. Do not mix them; the reader must be able to tell which is which.
+- 重複する資料をまとめ、主張と根拠を照合する。短い引用が役立つ場合は writing-quotation を使い、引用量の制約に従う。
+- 事実、成功例、失敗例、批判、執筆者の評価を見出しや本文で区別する。資料にない関連付けを資料の主張にしない。
+- 対立する結果は、条件や指標の違いを確認する。不一致が残る場合はそのまま記載する。
+- サブエージェントの結果も元資料で確認してから採用する。指摘の収集だけで完了にしない。
 
-## Prose structure: Assertion-Evidence form
+## 成果物
 
-Write the body in Assertion-Evidence form — claim first, then evidence.
-
-1. Prose: the writer states the claim or summary in their own words first.
-2. Immediately after, a code-block quotation from the source backs up the claim, formatted per `writing-quotation`.
-3. On the line after the closing fence, place the source reference `[source-name (YYYY/MM)]`.
-
-The reader grasps "what is being said" first, then checks "what is the basis". The reverse order (quotation first, claim later) is forbidden — the reader cannot tell what the quotation is for until they have read past it.
-
-Bad example (quotation first):
-
-```
-The standard recipe of pretraining on huge corpora and then running classical preference-label RLHF is now widely treated as obsolete.
-```
-
-[industry-tracker (2026/03)]
-
-The mainstream has shifted to a modular post-training stack.
-
-Good example (claim first):
-
-The classical RLHF pipeline (human preference labels → reward model → PPO) is no longer used in leading models; it has been replaced by a modular stack that separates concerns.
-
-```
-The standard recipe of pretraining on huge corpora and then running classical preference-label RLHF is now widely treated as obsolete. Every leading model released in the past year uses a different post-training stack.
-```
-
-[industry-tracker (2026/03)]
-
-## Source-reference label
-
-Within the `[label (YYYY/MM), location]` structure defined in `documenting-with-sources`, the survey skill fills the label slot with the publication or source name (media name, site name, etc.). The location is omitted when it cannot be pinned down.
-
-## Heading-content alignment
-
-Section headings and the items placed under them must match exactly.
-
-- If a heading is "human-side guardrails", only human conduct and discipline goes underneath. Tooling and CI/CD belong under a separate heading.
-- If a heading is "failure cases", do not mix in success stories or recommendations.
-- If a source spans multiple angles, either split it across the relevant sections, or place it under the most appropriate one and add an explicit note about the other angles.
-- Before finalising, walk every heading and check that everything underneath it actually belongs there.
-
-## Output destination
-
-Write the deliverable to `{CWD}/reports/` as a `.md` file. Create the directory if it does not exist. Sub-agents that emit intermediate artefacts use the same directory.
-
-## Workflow
-
-1. From the user's request, identify the claim or hypothesis and the collection scope.
-2. Design search queries for the scope (in multiple languages where appropriate).
-3. Dispatch sub-agents to investigate (one per angle, in parallel).
-4. Consolidate the sub-agent outputs; the main agent assembles the final version.
-5. Write out the deliverable to `{CWD}/reports/` as a `.md` file.
-
-## Sub-agent delegation rules
-
-When delegating to sub-agents, follow these.
-
-- Split by angle and dispatch in parallel (e.g. "papers & academia", "media & blogs", "social media", "industry signals").
-- Give each sub-agent the quality criteria and the conventions from `documenting-with-sources`. Re-emphasise "no fabricated associations or interpretations" specifically — sub-agents are particularly prone to drifting toward the calling-conversation context and inventing connections.
-- Sub-agent output is not the final deliverable. The main agent performs:
-  - Deduplication.
-  - Information completion (filling in missing affiliations, citation counts, etc. via additional lookups).
-  - Structural unification (tables, consistent section structure).
-  - Separation of criticism from supporting evidence.
-  - Explicit listing of investigation limits (information that could not be retrieved, unverified URLs, etc.).
-  - Removal of fabricated associations (see the corresponding section in `documenting-with-sources`).
-  - Heading-content alignment check (see above).
-
-## Deliverable structure
-
-```
-# Survey of {topic}
-
-Date: YYYY-MM-DD
-Scope: {scope description}
-
-## Table of Contents
-
-1. [{angle 1}](#1-angle-1-slug)
-2. [{angle 2}](#2-angle-2-slug)
-...
-N. [Criticism & concerns](#n-criticism-concerns)
-N+1. [Overall assessment](#n1-overall-assessment)
-N+2. [Investigation limits](#n2-investigation-limits)
-
-## 1. {angle 1} (e.g. academic papers)
-## 2. {angle 2} (e.g. media coverage)
-## 3. {angle 3} (e.g. social-media reactions)
-## 4. {angle 4} (e.g. industry signals)
-## N. Criticism & concerns
-## N+1. Overall assessment
-## N+2. Investigation limits
-```
-
-Adjust the section layout for the topic.
-
-## Table-of-contents requirements
-
-Always place a table of contents at the top of the report, directly after the metadata block and before the body. Writing the report without a ToC is forbidden.
-
-- If there are ten or more sections, or fifteen or more individual items (papers, articles, etc.), use a two-level ToC. Level 1 is the section name; level 2 is the section's main items (paper titles, article headlines, ...).
-- For short reports (five or fewer sections, few items per section) a single-level ToC is fine.
-- Provide anchor links. Use the renderer's slug rules (lowercased, spaces → hyphens, special characters dropped) for the link targets.
-- Even when the slug rule is uncertain, write the link rather than dropping it; let the renderer slugify.
-- ToC entries and section headings must match word for word. No abbreviation or paraphrase.
+- 保存先の指定や既存の規約を優先し、なければ作業ディレクトリの reports/ に Markdown を置く。
+- 冒頭に問い、対象期間、調査範囲と要点を示す。複数節のレポートには見出しに対応する目次リンクを置く。
+- 本文は題材に合う観点で構成し、比較に必要な情報を並べる。資料の種類ごとの節を機械的に全種類作らない。
+- 出典一覧、取得できなかった情報、結果を一般化できない条件を残す。リンクと重要な引用・数値を確認してから完了を報告する。

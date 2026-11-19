@@ -1,40 +1,22 @@
 ---
 name: documenting-with-sources
-description: Common conventions for writing Markdown documents that cite external sources (survey reports, paper explainers, and any deliverable that surfaces facts from outside). Defines mandatory citation, in-text reference format, quotation-versus-prose separation, the ban on fabricated associations, and the source-list format. Referenced by survey, paper-details, and any skill that produces sourced output.
+description: 外部資料やローカル証拠を使う Markdown 文書に、検証できる出典を付ける。調査報告・論文解説の共通規約。
 ---
 
-# Documenting with Sources
+# 出典を使う文書
 
-Common conventions for writing Markdown documents that pull from outside sources. Apply to any deliverable that surfaces facts taken from elsewhere — survey reports, paper explainers, and similar.
+読者が主張を元資料と照合できるようにする。
 
-## Cite every factual claim
+- 外部資料に基づく主張の近くに、資料名と URL、必要ならページ・節・図表の位置を付ける。ローカルの証拠はファイルのパス、該当箇所、実行条件などを示す。
+- 同じ根拠で説明する段落は一つの参照にまとめてよい。手続きの説明や、自分の提案を外部資料の事実として引用しない。
+- 関連する一次資料を優先する。元資料を読めていない場合は、どの資料を介した情報かと未確認の範囲を示す。
+- 原典が述べた内容と、自分の解釈・比較・提案・説明例を区別する。独自の考察を求められた場合は、根拠からの推論として明記する。
+- 関連がありそうという理由だけで、原典が扱っていない用途や因果関係を原典の主張に加えない。
 
-Every factual claim in the deliverable must carry a citation. A claim with no citation cannot be verified, and is worthless as a documented finding. If a claim cannot be tied to a source, mark it explicitly (e.g. "citation not confirmed"). Do not slip uncited claims in silently.
+## 参照と引用
 
-## Reference format
-
-- In-text references take the shape `[label (YYYY/MM), location]`. How to fill the `label` slot (publication name, author short-form, position-only for the paper under review, etc.) is decided by the calling skill.
-- Do not use bare numeric references such as `[1]` or `[2]`. Numbers alone force the reader to bounce between text and source list; readability drops.
-- For the formatting of quotation blocks themselves (code-block fencing, original-and-translation pairing, where to place the source reference, anti-patterns), follow the `writing-quotation` skill. Read `writing-quotation` before drafting.
-
-## Quotation vs prose
-
-- Keep quotations and prose (the writer's own summary or interpretation) visually and structurally separate. Even when not quoting, write in a way that prevents the source's claim and the writer's interpretation from blending.
-- When quoting a source written in a language other than the writer's working language, place the translation alongside the original inside the same code block (see `writing-quotation`).
-
-## No fabricated associations or interpretations
-
-Do not write interpretations, speculation, or associations that the source itself does not contain.
-
-- Do not invent connections such as "this relates to X", "this could be applied to Y", or "this suggests Z" when the source does not say so.
-- Do not import context from the surrounding conversation or the calling project into the body of the document. Descriptions of a source must stay within the source's own content.
-- Good: "Main criticism: even with flipped labels, accuracy does not always drop, and the text-gradient is mathematically distinct from classical gradient descent" (states what the source actually says).
-- Bad: "Relation to AI writing improvement: feedback-based improvement is mathematically different from gradient descent..." (the source does not say this; the connection is fabricated from conversation context).
-
-## Source-list format
-
-The source list at the end of the document uses this format:
-
-`[label, YYYY/MM] Author. "Title." Publication. URL`
-
-Do not use the `- [n]` list format.
+- 参照は読んで意味が分かるラベルを使う。既定は [資料名 (YYYY/MM), 位置] と資料へのリンク。bare numeric citation のような番号だけの表記は使わない。
+- paper-details の対象論文は [p.X, Section Y]、その他の文献は著者と年で示す。年月・位置が不明なら捏造しない。
+- 引用が必要なときだけ [writing-quotation](../writing-quotation/SKILL.md) を読む。要約の各文に引用ブロックを付ける必要はない。
+- 引用・翻訳の量は取得方法、利用条件、上位の制限に従う。公開 URL やローカルに保存した PDF だけで全文転載可能とは判断しない。
+- 文末の出典一覧には、本文で使った資料の著者、題名、日付、掲載元、URL またはローカルパスを示す。ローカル履歴からは必要な根拠だけを記載し、秘密情報を転記しない。

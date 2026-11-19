@@ -1,0 +1,4 @@
+# skill は既定で追跡しない。npx skills で入れるものは ~/.config/yadm/bootstrap が入れる。
+# 自作・改変した skill だけ `yadm add -f` で追加する（追跡済みのファイルは ignore の影響を受けない）。
+*
+!.gitignore

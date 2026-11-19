@@ -48,6 +48,20 @@ uv tool install claude-conversation-extractor
 echo "==> Installing pnpm global packages..."
 pnpm install -g atcoder-cli
 
+# agent skills (npx skills)。手を加えた skill と自作の skill は yadm で管理する。
+# codex も指定すると本体が ~/.agents/skills に入り、~/.claude/skills からリンクされる
+# （claude-code だけだと ~/.claude/skills にコピーされる）。
+echo "==> Installing agent skills..."
+skills_add() { npx -y skills add "$@" -g -y -a claude-code codex; }
+# pstack の tdd と teach は mattpocock と同名。後から入れる mattpocock 版を残す。
+skills_add backnotprop/pstack -s '*'
+skills_add mattpocock/skills \
+  -s grill-me grilling grill-with-docs handoff improve-codebase-architecture prototype tdd teach implement-spec
+skills_add vercel-labs/skills -s find-skills
+skills_add mathbullet/skills -s grilling-viz
+skills_add stablyai/orca -s orca-cli orchestration
+skills_add GoogleChrome/modern-web-guidance -s modern-web-guidance
+
 # fisher + fish プラグイン
 if command -v fish &>/dev/null; then
   echo "==> Installing fisher and fish plugins..."

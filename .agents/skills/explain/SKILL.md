@@ -1,36 +1,18 @@
 ---
 name: explain
-description: Conventions for writing a Markdown explainer that walks the reader through a concept or system. Lays out term-list formatting, Mermaid diagram rules, granularity expectations, and a fixed five-part structure. Use when the user asks for an explainer, a concept write-up, a glossary section, or otherwise wants a system or idea documented for another reader.
+description: 概念や仕組みを読者の前提知識に合わせた説明文書にする。用語、具体例、処理のつながりを補う。
 ---
 
-# Explainer Document Conventions
+# 概念・仕組みの説明
 
-## Term handling
+読者が「何に困り、何を変え、どう動き、何が得られるか」を追える文書にする。
 
-- Put a term list at the top of the document in table form (`| Term | Description |`). Every specialised term used in the body must be defined in this list at first occurrence.
-- A term-list entry defines what the term *is* in one or two sentences. The functional or behavioural detail goes in the body, not in the term list.
-- Even widely recognised proper nouns (industry-standard product names, infrastructure components, etc.) get defined here. Assume the reader does not know them.
-- When defining a compound term, define the constituent words too. If the compound has three words, give all three their own entries — readers cannot be expected to infer one from another.
-
-## Diagram conventions
-
-- Use Mermaid for diagrams. Do not use ASCII art.
-- Every node label is a term that exists in the term list. Do not introduce a new term inside a diagram.
-- Do not put `<br/>` inside a Mermaid node. Many renderers display the literal HTML tag. If a line break is needed, separate with ` / ` or shorten the text to fit one line.
-- For diagrams with four or more nodes, or where any label is long, use `graph TD` (top-down). `graph LR` (left-right) collapses long-label graphs into an unreadable horizontal strip.
-
-## Granularity of the description
-
-- Do not gloss details with vague language. Subjects, objects, and verbs must be explicit.
-- A phrase like "A uses B to do X" must specify what A is and why A is needed for X.
-- Avoid vague verbs like "receives" or "passes". Spell out who does what to bring the state about (e.g. "receives the address" → "the platform allocates the address automatically").
-- Do not require the reader to make a leap between steps. Every step's causal connection to the next is explicit.
-- Describe the mechanism in its general form first; tie it to specific named instances afterwards as "in case X, ...". Do not anchor the whole description to a single proper-noun example.
-
-## Structure
-
-1. Term list
-2. Background (why this thing is necessary, or what problem it addresses)
-3. Mechanism (how it works — includes the diagrams)
-4. Concrete steps (commands, procedures, or worked examples)
-5. Current state (where things stand today — for ongoing systems)
+- 読者の経験と質問に合わせて説明の出発点を決める。既に知っている用語の説明を積み重ねない。
+- 要点を示し、必要な背景、仕組み、具体的な入力と出力の例をつなぐ。節の数や順序は説明対象に合わせる。
+- 専門用語は本文の初出で定義する。略語を展開するだけで済ませず、何のために使うかを示す。
+- 用語表は繰り返し参照する用語が多い場合に置く。複合語の構成語を一律に別項目へ分解しない。
+- 因果関係や処理順序を省略しない。数値や小さな例で中間結果を示す。自作の例は原典の実験と区別する。
+- 比較には表、分岐・状態遷移・配置には図が役立つ場合がある。単純な一本道の操作は番号付き手順で十分。
+- Markdown の図は対応する描画環境があれば Mermaid を使う。長いラベルや多数のノードでは縦配置を優先し、描画結果を確認する。
+- HTML の成果物では html skill の配置・図・用語欄の規則を使う。Markdown 向けの図形式や用語表の配置を押し付けない。
+- 外部の事実を扱う場合は出典を付ける。最後に、読者が問いへの答えと適用条件を本文から得られるか確認する。

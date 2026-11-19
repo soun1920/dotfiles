@@ -1,10 +1,6 @@
 ---
 name: prompt-review
-description: >
-  このスキルは、ユーザーが「プロンプトをレビューして」「対話履歴を分析して」「理解度を診断して」
-  と依頼したとき、または /prompt-review で呼び出されたときに使用する。
-  過去のAIエージェント対話履歴（Claude Code, GitHub Copilot Chat, Cursor, Cline, Roo Code, Windsurf,
-  Antigravity, Gemini CLI, OpenAI Codex, OpenCode）を読み取り、技術理解度・プロンプティングパターン・AI依存度を推定してレポートを生成する。
+description: 過去の対話からプロンプトの伝わり方を分析し、日本語レポートを作る。ユーザーが対話・プロンプトのレビューを求めたときに使う。
 disable-model-invocation: true
 allowed-tools: Read, Write, Glob, Grep, Bash
 context: fork
@@ -46,7 +42,7 @@ python ~/.claude/skills/prompt-review/scripts/collect.py [OPTIONS] > "$OUTFILE"
 - 文字列のみ（例: `yonshogen`） → `--project yonshogen`
 - 文字列 + 数値（例: `yonshogen 30`） → `--project yonshogen --days 30`
 
-**重要**: スクリプトのパスは、このスキルファイルからの相対パスではなく、スキルが格納されているプロジェクトの `.claude/skills/prompt-review/scripts/collect.py` の絶対パスを使うこと。現在の作業ディレクトリ（`cwd`）を基準に `.claude/skills/prompt-review/scripts/collect.py` を指定する。
+スクリプトは、読んだ SKILL.md の実体と同じディレクトリの `scripts/collect.py` を使う。作業ディレクトリ配下に skill があるとは仮定しない。
 
 ### 出力の読み取り
 
@@ -112,6 +108,8 @@ Claude Code はユーザーに「〜しますか？」と確認を求めるこ�
 **判定基準**: メッセージが短文（概ね20文字以下）で、上記のパターンに該当するもの。ただし、短文でも具体的な技術指示を含むもの（例:「30pxがいいです」「asyncで」）は除外しない。
 
 ### 2a. 技術的理解度マップ
+
+理解度・AI依存度の分析はユーザーが求めた場合に限る。短い指示、質問形式、作業の委任だけから能力や依存を断定しない。下記のシグナルは仮説の手掛かりであり、本人の説明や前後の対話で確認する。指示ファイルを改善する依頼では、ユーザーの採点を目的にしない。
 
 プロンプトから言及されている技術概念を抽出し、3段階に分類:
 - **熟知**: 自信を持って指示、正確な用語使用、具体的な実装方針の提示
