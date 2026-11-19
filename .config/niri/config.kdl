@@ -6,11 +6,12 @@ config-notification {
     disable-failed
 }
 // Outputs: external monitor on top, laptop screen below, horizontally centered.
-output "HDMI-A-1" {
+// 画面配置は dms/outputs.kdl（DMS の画面設定）に任せる。ここが先にあると DMS の設定より優先される
+/-output "HDMI-A-1" {
     position x=0 y=0
 }
 
-output "eDP-1" {
+/-output "eDP-1" {
     scale 1.75
     position x=138 y=1080
 }
@@ -31,8 +32,7 @@ input {
             // You can set rules, model, layout, variant and options.
             // For more information, see xkeyboard-config(7).
 
-            layout "us,jp"
-            options "grp:win_space_toggle"
+            layout "jp,us"
 
             // If this section is empty, niri will fetch xkb settings
             // from org.freedesktop.locale1. You can control these using
@@ -174,8 +174,7 @@ spawn-at-startup "sh" "-c" "wl-paste --type image --watch cliphist store"
 environment {
   XDG_CURRENT_DESKTOP "niri"
   XMODIFIERS "@im=fcitx"
-  GTK_IM_MODULE "fcitx"
-  QT_IM_MODULE "fcitx"
+  GTK_IM_MODULE "wayland"
   QT_QPA_PLATFORMTHEME "kde"
 }
 hotkey-overlay {
@@ -279,6 +278,11 @@ recent-windows {
         Alt+grave       { next-window filter="app-id"; }
         Alt+Shift+grave { previous-window filter="app-id"; }
     }
+}
+
+// ワークスペースのテンプレート一覧 (~/.config/elephant/nirisessions.toml)
+binds {
+    Mod+Space hotkey-overlay-title="Workspace Templates" { spawn "walker" "-m" "nirisessions"; }
 }
 
 // Include dms files
